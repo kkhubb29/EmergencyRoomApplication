@@ -1,9 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 // list of patients
 public class ListOfPatients {
@@ -37,6 +34,7 @@ public class ListOfPatients {
         return patients;
     }
 
+    /*
     // EFFECTS: Sorts list of patients in order of score
     //          orders the highest score to the lowest score
     public void getListOfPatientsSorted() {
@@ -46,7 +44,7 @@ public class ListOfPatients {
             }
         });
     }
-
+*/
     // EFFECTS: If the patient is in ListOfPatients returns the index of
     //          given patientName and returns null otherwise
     public Patient findPatient(String patientName) {

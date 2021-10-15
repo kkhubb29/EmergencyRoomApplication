@@ -20,7 +20,7 @@ they decided who to deal with next
 For **phase 1**, I am going ot focus on a patient being able to enter their name and the ER coordinator being able 
 to manipulate the list and to assign them.
 
-I will introduce scoring and the questionnaire at a later phase. 
+I will introduce sorting the list at a later phase. 
 
 ## User Stories:
 - As a user *(patient)*, I want to be able to add my name to the ER patient list.
