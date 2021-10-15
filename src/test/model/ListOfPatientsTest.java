@@ -2,11 +2,9 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
-import java.util.List;
 
-import model.ListOfPatients;
-import model.Patient;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -79,6 +77,16 @@ class ListOfPatientsTest {
     }
 
     @Test
+    public void testFindPatientNoPatient() {
+        testListOfPatients.addPatient(p1);
+        testListOfPatients.addPatient(p2);
+        testListOfPatients.addPatient(p3);
+        testListOfPatients.addPatient(p4);
+        testListOfPatients.addPatient(p4);
+        assertEquals(null, testListOfPatients.findPatient("Nancy"));
+    }
+
+    @Test
     public void testFindPatientByInt() {
         testListOfPatients.addPatient(p1);
         testListOfPatients.addPatient(p2);
@@ -88,4 +96,10 @@ class ListOfPatientsTest {
         assertEquals(p4, testListOfPatients.findPatientByIndex(3));
     }
 
+    @Test
+    public void testGetListOfPatients() {
+        testListOfPatients.addPatient(p1);
+        ArrayList<Patient> testPatients = testListOfPatients.getListOfPatients();
+        assertEquals(testPatients.get(0), p1);
+    }
 }

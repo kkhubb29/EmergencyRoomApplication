@@ -26,10 +26,8 @@ public class ListOfPatients {
         return patients.contains(p);
     }
 
-    public void viewListOfPatients() {
-        for (int i = 0; i < patients.size(); i++) {
-            System.out.println(i + " - " + patients.get(i).getPatientName() + ", " + patients.get(i).getAssignment());
-        }
+    public ArrayList<Patient> getListOfPatients() {
+        return patients;
     }
 
     public Patient findPatient(String patientName) {

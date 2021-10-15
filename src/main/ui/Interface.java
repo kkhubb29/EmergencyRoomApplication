@@ -136,28 +136,37 @@ public class Interface {
 
     private void doRemovePatient() {
         System.out.println("What is the number of the patient you would like to remove?");
-        erPatients.viewListOfPatients();
+        viewListOfPatients();
         int numPatient = input.nextInt();
         erPatients.removePatient(erPatients.findPatientByIndex(numPatient));
         System.out.println("Patient " + numPatient + " removed!");
-        erPatients.viewListOfPatients();
+        viewListOfPatients();
+    }
+
+
+    public void viewListOfPatients() {
+        ArrayList<Patient> patientsList = erPatients.getListOfPatients();
+        for (int i = 0; i < patientsList.size(); i++) {
+            System.out.println(i + " - " + patientsList.get(i).getPatientName() + ", "
+                    + patientsList.get(i).getAssignment());
+        }
     }
 
 
     private void doViewList() {
-        erPatients.viewListOfPatients();
+        viewListOfPatients();
     }
 
     public void doAssignPatient() {
         System.out.println("What is the number of the patient you would like to assign?");
-        erPatients.viewListOfPatients();
+        viewListOfPatients();
         int numPatient = input.nextInt();
         System.out.println("Where would you like to assign this patient?");
         displayAssignPatient();
         String assignmentPatient = input.next();
         erPatients.findPatientByIndex(numPatient).setAssignment(assignmentPatient);
         System.out.println("Patient " + numPatient + " assignment changed to " + assignmentPatient + ":");
-        erPatients.viewListOfPatients();
+        viewListOfPatients();
     }
 
     public void displayAssignPatient() {
