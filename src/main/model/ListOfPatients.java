@@ -34,17 +34,7 @@ public class ListOfPatients {
         return patients;
     }
 
-    /*
-    // EFFECTS: Sorts list of patients in order of score
-    //          orders the highest score to the lowest score
-    public void getListOfPatientsSorted() {
-        Collections.sort(patients, new Comparator<Patient>() {
-            public int compare(Patient p1, Patient p2) {
-                return p1.getScore() > p2.getScore() ? -1 : 1;
-            }
-        });
-    }
-*/
+
     // EFFECTS: If the patient is in ListOfPatients returns the index of
     //          given patientName and returns null otherwise
     public Patient findPatient(String patientName) {
