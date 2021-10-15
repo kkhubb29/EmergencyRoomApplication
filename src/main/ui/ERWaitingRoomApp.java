@@ -6,28 +6,23 @@ import model.ListOfPatients;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Interface {
-/*    private Patient patientName;
-    private Patient patientAge;
-    private Patient pain;
-    private Patient troubleBreathing;
-    private Patient chestPain;
-    private Patient bleeding;
-    private Patient nauseous;
-    private Patient brokenBone;
-    private Patient headInjury;
-    private Patient pregnant;
-    private Patient score;
-    private Patient assignment;*/
+// This class references code from this repo
+// Link: https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
+
+// Interface for ER Waiting Room application
+public class ERWaitingRoomApp {
     private Scanner input;
 
     private ListOfPatients erPatients;
     Patient p1;
 
-    public Interface() {
+    // EFFECTS: runs ER Waiting Room application
+    public ERWaitingRoomApp() {
         runIdentity();
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user input
     private void runIdentity() {
         boolean keepGoing = true;
         String identity = null;
@@ -50,12 +45,15 @@ public class Interface {
         System.out.println("\nGoodbye!");
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes ListOfPatients
     private void init() {
         erPatients = new ListOfPatients();
         input = new Scanner(System.in);
         input.useDelimiter("\n");
     }
 
+    // EFFECTS: displays menu of options to user
     public void displayMenu() {
         System.out.println("\nWho are you?");
         System.out.println("Select from:");
@@ -64,7 +62,8 @@ public class Interface {
         System.out.println("\tq -> quit");
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: process user identity
     private void processIdentity(String identity) {
         if (identity.equals("p")) {
             runPatient();
@@ -75,6 +74,9 @@ public class Interface {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: conducts taking a patients name and adding
+    //          them to the list
     private void runPatient() {
         System.out.println("Name?");
         String namePatient = input.next();
@@ -83,7 +85,8 @@ public class Interface {
         System.out.println("\nThank you for filling out the form we will be with you shortly!");
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: process user input
     private void runERCoordinator() {
         boolean keepGoing = true;
         String command = null;
@@ -104,6 +107,7 @@ public class Interface {
         System.out.println("\nGoodbye!");
     }
 
+    // EFFECTS: display menu of options to user
     public void displayERCoordinator() {
         System.out.println("\nSelect from:");
         System.out.println("\ta -> add a patient");
@@ -113,6 +117,8 @@ public class Interface {
         System.out.println("\tq -> quit");
     }
 
+    // MODIFIES: this
+    // EFFECTS: process user command
     private void processCommand(String command) {
         if (command.equals("a")) {
             doAddPatient();
@@ -127,6 +133,8 @@ public class Interface {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: conducts adding a patient to the list
     private void doAddPatient() {
         System.out.println("What is the name of the patient you would like to add?");
         String namePatient = input.next();
@@ -134,6 +142,8 @@ public class Interface {
         erPatients.addPatient(p1);
     }
 
+    // MODIFIES: this
+    // EFFECTS: conducts removing a patient to the list
     private void doRemovePatient() {
         System.out.println("What is the number of the patient you would like to remove?");
         viewListOfPatients();
@@ -143,7 +153,7 @@ public class Interface {
         viewListOfPatients();
     }
 
-
+    // EFFECTS: prints list of patients to the screen
     public void viewListOfPatients() {
         ArrayList<Patient> patientsList = erPatients.getListOfPatients();
         for (int i = 0; i < patientsList.size(); i++) {
@@ -152,11 +162,14 @@ public class Interface {
         }
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: conducts printing a list of patient to the screen
     private void doViewList() {
         viewListOfPatients();
     }
 
+    // MODIFIES: this
+    // EFFECTS: conducts assigning a patient
     public void doAssignPatient() {
         System.out.println("What is the number of the patient you would like to assign?");
         viewListOfPatients();
@@ -169,13 +182,13 @@ public class Interface {
         viewListOfPatients();
     }
 
+    // EFFECTS: displays menu of options to user
     public void displayAssignPatient() {
         System.out.println("\nSelect from:");
         System.out.println("\tdoctor");
         System.out.println("\tnurse practitioner");
         System.out.println("\twaiting room");
     }
-
 
 
 }
