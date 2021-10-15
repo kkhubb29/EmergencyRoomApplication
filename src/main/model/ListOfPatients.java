@@ -1,6 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 // list of patients
 public class ListOfPatients {
@@ -24,7 +27,6 @@ public class ListOfPatients {
         patients.remove(p);
     }
 
-
     // EFFECTS: Returns true if Patient p is a patient in the ListOfPatients
     //          and false otherwise
     public boolean contains(Patient p) {
@@ -35,11 +37,22 @@ public class ListOfPatients {
         return patients;
     }
 
-    // EFFECTS: If the patient is in ListOfPatients returns the patient of
+    // EFFECTS: Sorts list of patients in order of score
+    //          orders highest score to lowest score
+    public void getListOfPatientsSorted() {
+        Collections.sort(patients, new Comparator<Patient>() {
+            @Override
+            public int compare(Patient o1, Patient o2) {
+                return o1.getScore() > o2.getScore() ? -1 : 1;
+            }
+        });
+    }
+
+    // EFFECTS: If the patient is in ListOfPatients returns the index of
     //          given patientName and returns null otherwise
     public Patient findPatient(String patientName) {
         for (int i = 0; i < patients.size(); i++) {
-            if (patients.get(i).getPatientName() == patientName) {
+            if (patients.get(i).getPatientName().equals(patientName)) {
                 return patients.get(i);
             }
         }

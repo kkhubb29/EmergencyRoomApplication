@@ -81,8 +81,71 @@ public class ERWaitingRoomApp {
         System.out.println("Name?");
         String namePatient = input.next();
         p1 = new Patient(namePatient);
+        displayAgeQuestion();
+        displayPainQuestion();
+        displayTroubleBreathingQuestion();
+        displayChestPainQuestion();
+        displayBleedingQuestion();
+        displayNauseousQuestion();
+        displayHeadInjuryQuestion();
+        displayPregnantQuestion();
+        p1.setScore(p1.calculateScore());
         erPatients.addPatient(p1);
         System.out.println("\nThank you for filling out the form we will be with you shortly!");
+    }
+
+    public void displayAgeQuestion() {
+        System.out.println("Age?");
+        int agePatient = input.nextInt();
+        p1.setAge(agePatient);
+    }
+
+    public void displayPainQuestion() {
+        System.out.println("What is your pain on a scale of 0-10?");
+        int painPatient = input.nextInt();
+        p1.setPain(painPatient);
+    }
+
+    public void displayTroubleBreathingQuestion() {
+        System.out.println("Are you having trouble breathing (y/n)?");
+        String troubleBreathingPatient = input.next();
+        troubleBreathingPatient = troubleBreathingPatient.toLowerCase();
+        p1.setTroubleBreathing(troubleBreathingPatient);
+    }
+
+    public void displayChestPainQuestion() {
+        System.out.println("Are you experiencing chest pains (y/n)?");
+        String chestPainPatient = input.next();
+        chestPainPatient = chestPainPatient.toLowerCase();
+        p1.setChestPain(chestPainPatient);
+    }
+
+    public void displayBleedingQuestion() {
+        System.out.println("Are you bleeding (y/n)?");
+        String bleedingPatient = input.next();
+        bleedingPatient = bleedingPatient.toLowerCase();
+        p1.setBleeding(bleedingPatient);
+    }
+
+    public void displayNauseousQuestion() {
+        System.out.println("Are you nauseous (y/n)?");
+        String nauseousPatient = input.next();
+        nauseousPatient = nauseousPatient.toLowerCase();
+        p1.setNauseous(nauseousPatient);
+    }
+
+    public void displayHeadInjuryQuestion() {
+        System.out.println("Do you have a head injury (y/n)?");
+        String headInjuryPatient = input.next();
+        headInjuryPatient = headInjuryPatient.toLowerCase();
+        p1.setHeadInjury(headInjuryPatient);
+    }
+
+    public void displayPregnantQuestion() {
+        System.out.println("Are you pregnant (y/n)?");
+        String pregnantPatient = input.next();
+        pregnantPatient = pregnantPatient.toLowerCase();
+        p1.setPregnant(pregnantPatient);
     }
 
     // MODIFIES: this
@@ -145,20 +208,22 @@ public class ERWaitingRoomApp {
     // MODIFIES: this
     // EFFECTS: conducts removing a patient from the list
     private void doRemovePatient() {
-        System.out.println("What is the number of the patient you would like to remove?");
+        System.out.println("What is the name of the patient you would like to remove?");
         viewListOfPatients();
-        int numPatient = input.nextInt();
-        erPatients.removePatient(erPatients.findPatientByIndex(numPatient));
-        System.out.println("Patient " + numPatient + " removed!");
+        String namePatient = input.next();
+        erPatients.removePatient(erPatients.findPatient(namePatient));
+        System.out.println(namePatient + " removed!");
         viewListOfPatients();
     }
 
     // EFFECTS: prints list of patients to the screen
     public void viewListOfPatients() {
+        erPatients.getListOfPatientsSorted();
         ArrayList<Patient> patientsList = erPatients.getListOfPatients();
         for (int i = 0; i < patientsList.size(); i++) {
-            System.out.println(i + " - " + patientsList.get(i).getPatientName() + ", "
-                    + patientsList.get(i).getAssignment());
+            int j = i + 1;
+            System.out.println(j + " - " + patientsList.get(i).getPatientName() + ", "
+                    + patientsList.get(i).getAssignment() + ", score:" + patientsList.get(i).getScore());
         }
     }
 
@@ -171,14 +236,14 @@ public class ERWaitingRoomApp {
     // MODIFIES: this
     // EFFECTS: conducts assigning a patient
     public void doAssignPatient() {
-        System.out.println("What is the number of the patient you would like to assign?");
+        System.out.println("What is the name of the patient you would like to assign?");
         viewListOfPatients();
-        int numPatient = input.nextInt();
+        String namePatient = input.next();
         System.out.println("Where would you like to assign this patient?");
         displayAssignPatient();
         String assignmentPatient = input.next();
-        erPatients.findPatientByIndex(numPatient).setAssignment(assignmentPatient);
-        System.out.println("Patient " + numPatient + " assignment changed to " + assignmentPatient + ":");
+        erPatients.findPatient(namePatient).setAssignment(assignmentPatient);
+        System.out.println(namePatient + " assignment has been changed to " + assignmentPatient + ":");
         viewListOfPatients();
     }
 

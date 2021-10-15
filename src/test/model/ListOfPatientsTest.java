@@ -102,4 +102,21 @@ class ListOfPatientsTest {
         ArrayList<Patient> testPatients = testListOfPatients.getListOfPatients();
         assertEquals(testPatients.get(0), p1);
     }
+
+    @Test
+    public void testGetListOfPatientsSorted() {
+        testListOfPatients.addPatient(p1);
+        p1.setScore(8);
+        testListOfPatients.addPatient(p2);
+        p2.setScore(7);
+        testListOfPatients.addPatient(p3);
+        p3.setScore(10);
+        testListOfPatients.addPatient(p4);
+        p4.setScore(6);
+        testListOfPatients.addPatient(p4);
+        p5.setScore(5);
+        testListOfPatients.getListOfPatientsSorted();
+        ArrayList<Patient> testPatients = testListOfPatients.getListOfPatients();
+        assertEquals(p3.getPatientName(), testPatients.get(0).getPatientName());
+    }
 }
