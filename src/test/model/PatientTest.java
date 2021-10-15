@@ -147,4 +147,20 @@ public class PatientTest {
         assertNotEquals(37, testPatient.calculateScore());
     }
 
+    @Test
+    public void testCalculateScoreMixResponse() {
+        testPatient.setAge(23);
+        testPatient.setPain(4);
+        testPatient.setTroubleBreathing("y");
+        testPatient.setChestPain("n");
+        testPatient.setBleeding("n");
+        testPatient.setNauseous("y");
+        testPatient.setBrokenBone("n");
+        testPatient.setHeadInjury("y");
+        testPatient.setPregnant("y");
+
+        assertEquals(44, testPatient.calculateScore());
+        assertNotEquals(37, testPatient.calculateScore());
+    }
+
 }
