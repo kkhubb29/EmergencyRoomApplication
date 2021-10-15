@@ -163,4 +163,20 @@ public class PatientTest {
         assertNotEquals(37, testPatient.calculateScore());
     }
 
+    @Test
+    public void testCalculateScoreResponse() {
+        testPatient.setAge(90);
+        testPatient.setPain(4);
+        testPatient.setTroubleBreathing("y");
+        testPatient.setChestPain("n");
+        testPatient.setBleeding("n");
+        testPatient.setNauseous("y");
+        testPatient.setBrokenBone("n");
+        testPatient.setHeadInjury("y");
+        testPatient.setPregnant("y");
+
+        assertEquals(47, testPatient.calculateScore());
+        assertNotEquals(34, testPatient.calculateScore());
+    }
+
 }
