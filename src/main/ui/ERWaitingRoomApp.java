@@ -143,7 +143,7 @@ public class ERWaitingRoomApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: conducts removing a patient to the list
+    // EFFECTS: conducts removing a patient from the list
     private void doRemovePatient() {
         System.out.println("What is the number of the patient you would like to remove?");
         viewListOfPatients();
