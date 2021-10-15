@@ -106,46 +106,55 @@ public class Patient {
         this.age = agePatient;
     }
 
+    // REQUIRES: painPatient is a number between 0 and 10
     // EFFECTS: pain is updated to painPatient
     public void setPain(int painPatient) {
         this.pain = painPatient;
     }
 
+    // REQUIRES: troubleBreathingPatient has a non-zero length
     // EFFECTS: troubleBreathing is updated to troubleBreathingPatient
     public void setTroubleBreathing(String troubleBreathingPatient) {
         this.troubleBreathing = troubleBreathingPatient;
     }
 
+    // REQUIRES: chestPainPatient has a non-zero length
     // EFFECTS: chestPain is updated to chestPainPatient
     public void setChestPain(String chestPainPatient) {
         this.chestPain = chestPainPatient;
     }
 
+    // REQUIRES: bleedingPatient has a non-zero length
     // EFFECTS: bleeding is updated to bleedingPatient
     public void setBleeding(String bleedingPatient) {
         this.bleeding = bleedingPatient;
     }
 
+    // REQUIRES: nauseousPatient has a non-zero length
     // EFFECTS: nauseous is updated to nauseousPatient
     public void setNauseous(String nauseousPatient) {
         this.nauseous = nauseousPatient;
     }
 
+    // REQUIRES: brokenBonePatient has a non-zero length
     // EFFECTS: brokenBone is updated to brokenBonePatient
     public void setBrokenBone(String brokenBonePatient) {
         this.brokenBone = brokenBonePatient;
     }
 
+    // REQUIRES: headInjuryPatient has a non-zero length
     // EFFECTS: headInjury is updated to headInjuryPatient
     public void setHeadInjury(String headInjuryPatient) {
         this.headInjury = headInjuryPatient;
     }
 
+    // REQUIRES: pregnantPatient has a non-zero length
     // EFFECTS: pregnant is updated to pregnantPatient
     public void setPregnant(String pregnantPatient) {
         this.pregnant = pregnantPatient;
     }
 
+    // REQUIRES: yesOrNo has a non-zero length
     // EFFECTS: returns true if string is y and false otherwise
     public boolean dealWithYOrN(String yesOrNo) {
         if (yesOrNo.equals("y")) {
@@ -154,7 +163,7 @@ public class Patient {
         return false;
     }
 
-    // EFFECTS:
+    // EFFECTS: returns calculated score
     public int calculateScore() {
         score = score + pain;
         if ((age > 80) || (age < 2)) {

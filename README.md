@@ -22,7 +22,7 @@ to manipulate the list and to assign them.
 
 I will introduce scoring and the questionnaire at a later phase. 
 
-##User Stories:
+## User Stories:
 - As a user *(patient)*, I want to be able to add my name to the ER patient list.
 - As a user *(ER coordinator)*, I want to be able to view the list of patient and their current assignments.
 - As a user *(ER coordinator)*, I want to be able to assign patients to a doctor

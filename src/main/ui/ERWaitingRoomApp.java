@@ -75,8 +75,8 @@ public class ERWaitingRoomApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: conducts taking a patients name and adding
-    //          them to the list
+    // EFFECTS: conducts taking a patient's questionnaire information
+    //          and adding them to the list
     private void runPatient() {
         System.out.println("Name?");
         String namePatient = input.next();
@@ -94,18 +94,21 @@ public class ERWaitingRoomApp {
         System.out.println("\nThank you for filling out the form we will be with you shortly!");
     }
 
+    // EFFECTS: displays age question to user and records answer
     public void displayAgeQuestion() {
         System.out.println("Age?");
         int agePatient = input.nextInt();
         p1.setAge(agePatient);
     }
 
+    // EFFECTS: displays pain question to user and records answer
     public void displayPainQuestion() {
         System.out.println("What is your pain on a scale of 0-10?");
         int painPatient = input.nextInt();
         p1.setPain(painPatient);
     }
 
+    // EFFECTS: displays trouble breathing question to user and records answer
     public void displayTroubleBreathingQuestion() {
         System.out.println("Are you having trouble breathing (y/n)?");
         String troubleBreathingPatient = input.next();
@@ -113,6 +116,7 @@ public class ERWaitingRoomApp {
         p1.setTroubleBreathing(troubleBreathingPatient);
     }
 
+    // EFFECTS: displays chest pain question to user and records answer
     public void displayChestPainQuestion() {
         System.out.println("Are you experiencing chest pains (y/n)?");
         String chestPainPatient = input.next();
@@ -120,6 +124,7 @@ public class ERWaitingRoomApp {
         p1.setChestPain(chestPainPatient);
     }
 
+    // EFFECTS: displays bleeding question to user and records answer
     public void displayBleedingQuestion() {
         System.out.println("Are you bleeding (y/n)?");
         String bleedingPatient = input.next();
@@ -127,6 +132,7 @@ public class ERWaitingRoomApp {
         p1.setBleeding(bleedingPatient);
     }
 
+    // EFFECTS: displays nauseous question to user and records answer
     public void displayNauseousQuestion() {
         System.out.println("Are you nauseous (y/n)?");
         String nauseousPatient = input.next();
@@ -134,6 +140,7 @@ public class ERWaitingRoomApp {
         p1.setNauseous(nauseousPatient);
     }
 
+    // EFFECTS: displays head injury question to user and records answer
     public void displayHeadInjuryQuestion() {
         System.out.println("Do you have a head injury (y/n)?");
         String headInjuryPatient = input.next();
@@ -141,6 +148,7 @@ public class ERWaitingRoomApp {
         p1.setHeadInjury(headInjuryPatient);
     }
 
+    // EFFECTS: displays pregnant question to user and records answer
     public void displayPregnantQuestion() {
         System.out.println("Are you pregnant (y/n)?");
         String pregnantPatient = input.next();

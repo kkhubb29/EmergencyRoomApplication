@@ -1,9 +1,9 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 // list of patients
 public class ListOfPatients {
@@ -38,12 +38,11 @@ public class ListOfPatients {
     }
 
     // EFFECTS: Sorts list of patients in order of score
-    //          orders highest score to lowest score
+    //          orders the highest score to the lowest score
     public void getListOfPatientsSorted() {
         Collections.sort(patients, new Comparator<Patient>() {
-            @Override
-            public int compare(Patient o1, Patient o2) {
-                return o1.getScore() > o2.getScore() ? -1 : 1;
+            public int compare(Patient p1, Patient p2) {
+                return p1.getScore() > p2.getScore() ? -1 : 1;
             }
         });
     }

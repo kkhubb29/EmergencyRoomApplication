@@ -44,6 +44,12 @@ public class PatientTest {
     }
 
     @Test
+    public void testSetScore() {
+        testPatient.setScore(9);
+        assertEquals(9, testPatient.getScore());
+    }
+
+    @Test
     public void testSetAge() {
         testPatient.setAge(8);
         assertEquals(8, testPatient.getAge());
@@ -98,13 +104,19 @@ public class PatientTest {
     }
 
     @Test
-    public void testDealWithYOrN() {
+    public void testDealWithYOrNYesValue() {
         testPatient.setTroubleBreathing("y");
         assertTrue(testPatient.dealWithYOrN(testPatient.getTroubleBreathing()));
     }
 
     @Test
-    public void testCalculateScore() {
+    public void testDealWithYOrNNoValue() {
+        testPatient.setTroubleBreathing("n");
+        assertFalse(testPatient.dealWithYOrN(testPatient.getTroubleBreathing()));
+    }
+
+    @Test
+    public void testCalculateScoreAllTrue() {
         testPatient.setAge(1);
         testPatient.setPain(4);
         testPatient.setTroubleBreathing("y");
@@ -115,8 +127,24 @@ public class PatientTest {
         testPatient.setHeadInjury("y");
         testPatient.setPregnant("y");
 
-        assertEquals(77, testPatient.calculateScore());
-        assertNotEquals(67, testPatient.calculateScore());
+        assertEquals(67, testPatient.calculateScore());
+        assertNotEquals(41, testPatient.calculateScore());
+    }
+
+    @Test
+    public void testCalculateScoreAllFalse() {
+        testPatient.setAge(1);
+        testPatient.setPain(4);
+        testPatient.setTroubleBreathing("n");
+        testPatient.setChestPain("n");
+        testPatient.setBleeding("n");
+        testPatient.setNauseous("n");
+        testPatient.setBrokenBone("n");
+        testPatient.setHeadInjury("n");
+        testPatient.setPregnant("n");
+
+        assertEquals(7, testPatient.calculateScore());
+        assertNotEquals(37, testPatient.calculateScore());
     }
 
 }
