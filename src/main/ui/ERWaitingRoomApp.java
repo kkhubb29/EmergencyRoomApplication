@@ -226,7 +226,7 @@ public class ERWaitingRoomApp {
 
     // EFFECTS: prints list of patients to the screen
     public void viewListOfPatients() {
-        //erPatients.getListOfPatientsSorted();
+        erPatients.getListOfPatientsSorted();
         ArrayList<Patient> patientsList = erPatients.getListOfPatients();
         for (int i = 0; i < patientsList.size(); i++) {
             int j = i + 1;

@@ -103,7 +103,7 @@ class ListOfPatientsTest {
         assertEquals(testPatients.get(0), p1);
     }
 
-   /* @Test
+   @Test
     public void testGetListOfPatientsSorted() {
         testListOfPatients.addPatient(p1);
         p1.setScore(8);
@@ -118,5 +118,5 @@ class ListOfPatientsTest {
         testListOfPatients.getListOfPatientsSorted();
         ArrayList<Patient> testPatients = testListOfPatients.getListOfPatients();
         assertEquals(p3.getPatientName(), testPatients.get(0).getPatientName());
-    }*/
+    }
 }
