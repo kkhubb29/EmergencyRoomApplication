@@ -19,7 +19,7 @@ class ListOfPatientsTest {
 
     @BeforeEach
     void runBefore() {
-        testListOfPatients = new ListOfPatients();
+        testListOfPatients = new ListOfPatients("test list");
         p1 = new Patient("Jane");
         p2 = new Patient("May");
         p3 = new Patient("Selina");
@@ -118,5 +118,19 @@ class ListOfPatientsTest {
         testListOfPatients.getListOfPatientsSorted();
         ArrayList<Patient> testPatients = testListOfPatients.getListOfPatients();
         assertEquals(p3.getPatientName(), testPatients.get(0).getPatientName());
+    }
+
+    @Test
+    public void testGetName() {
+        assertEquals("test list", testListOfPatients.getName());
+    }
+
+    @Test
+    public void testNumPatients() {
+        assertEquals(0, testListOfPatients.numPatients());
+        testListOfPatients.addPatient(p1);
+        testListOfPatients.addPatient(p2);
+        testListOfPatients.addPatient(p3);
+        assertEquals(3, testListOfPatients.numPatients());
     }
 }

@@ -25,10 +25,10 @@ I will introduce sorting the list at a later phase.
 ## User Stories:
 - As a user *(patient)*, I want to be able to add my name to the ER patient list.
 - As a user *(ER coordinator)*, I want to be able to view the list of patient and their current assignments.
-- As a user *(ER coordinator)*, I want to be able to assign patients to a doctor
-- As a user *(ER coordinator)*, I want to be able to assign patients to a nurse practitioner
+- As a user *(ER coordinator)*, I want to be able to assign patients to a doctor.
+- As a user *(ER coordinator)*, I want to be able to assign patients to a nurse practitioner.
 - As a user *(ER coordinator)*, I want to be able to add and remove patients from the ER patient list.
-- As a user *(ER coordinator)*, I want to be able to save the list of patients to file
-- As a user *(ER coordinator)*, I want to be able to load my to do list from file
+- As a user *(ER coordinator)*, I want to be able to save the list of patients to file.
+- As a user *(ER coordinator)*, I want to be able to load my to do list from file.
 
 

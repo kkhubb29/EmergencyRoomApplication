@@ -1,16 +1,27 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 // list of patients
-public class ListOfPatients {
+public class ListOfPatients implements Writable {
+    private String name;
     private ArrayList<Patient> patients;
 
     // EFFECTS: list is empty
-    public ListOfPatients() {
+    public ListOfPatients(String name) {
+        this.name = name;
         patients = new ArrayList<>();
+    }
+
+    public String getName() {
+        return name;
     }
 
     // MODIFIES: this
@@ -30,6 +41,11 @@ public class ListOfPatients {
     //          and false otherwise
     public boolean contains(Patient p) {
         return patients.contains(p);
+    }
+
+    // EFFECTS: returns number of patients in ListOfPatients
+    public int numPatients() {
+        return patients.size();
     }
 
     public ArrayList<Patient> getListOfPatients() {
@@ -66,4 +82,27 @@ public class ListOfPatients {
         return patients.get(patientNum);
     }
 
+    // EFFECTS: returns an unmodifiable list of patients in this list of patients
+    public List<Patient> getPatients() {
+        return Collections.unmodifiableList(patients);
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("patients", patientsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray patientsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Patient p : patients) {
+            jsonArray.put(p.toJson());
+        }
+
+        return jsonArray;
+    }
 }

@@ -2,22 +2,33 @@ package ui;
 
 import model.Patient;
 import model.ListOfPatients;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 // This class references code from this repo
 // Link: https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
 
-// Interface for ER Waiting Room application
+// Class for ER Waiting Room application
 public class ERWaitingRoomApp {
+    private static final String JSON_STORE = "./data/listOfPatients.json";
     private Scanner input;
-
     private ListOfPatients erPatients;
     Patient p1;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
-    // EFFECTS: runs ER Waiting Room application
-    public ERWaitingRoomApp() {
+
+    // EFFECTS: constructs a list of patients and runs er application
+    public ERWaitingRoomApp() throws FileNotFoundException {
+        input = new Scanner(System.in);
+        erPatients = new ListOfPatients("ER Patients");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runIdentity();
     }
 
@@ -48,7 +59,7 @@ public class ERWaitingRoomApp {
     // MODIFIES: this
     // EFFECTS: initializes ListOfPatients
     private void init() {
-        erPatients = new ListOfPatients();
+        erPatients = new ListOfPatients("ER Patients");
         input = new Scanner(System.in);
         input.useDelimiter("\n");
     }
@@ -183,22 +194,29 @@ public class ERWaitingRoomApp {
         System.out.println("\nSelect from:");
         System.out.println("\ta -> add a patient");
         System.out.println("\tr -> remove a patient");
-        System.out.println("\tv -> view list of patients");
         System.out.println("\ts -> assign a patient");
+        System.out.println("\tv -> view list of patients");
+        System.out.println("\tf -> save list of patients to file");
+        System.out.println("\tl -> load list of patients from file");
         System.out.println("\tq -> quit");
     }
 
     // MODIFIES: this
     // EFFECTS: process user command
     private void processCommand(String command) {
+        command = command.toLowerCase();
         if (command.equals("a")) {
             doAddPatient();
         } else if (command.equals("r")) {
             doRemovePatient();
-        } else if (command.equals("v")) {
-            doViewList();
         } else if (command.equals("s")) {
             doAssignPatient();
+        } else if (command.equals("v")) {
+            doViewList();
+        } else if (command.equals("save")) {
+            saveListOfPatients();
+        } else if (command.equals("l")) {
+            loadListOfPatients();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -263,5 +281,27 @@ public class ERWaitingRoomApp {
         System.out.println("\twaiting room");
     }
 
+    // EFFECTS: saves the workroom to file
+    private void saveListOfPatients() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(erPatients);
+            jsonWriter.close();
+            System.out.println("Saved " + erPatients.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadListOfPatients() {
+        try {
+            erPatients = jsonReader.read();
+            System.out.println("Loaded " + erPatients.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
 
 }

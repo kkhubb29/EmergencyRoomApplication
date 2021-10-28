@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 //represents a patient with name, assignment, and score
-public class Patient {
+public class Patient implements Writable {
     private String patientName;
     private int score = 0;
     private String assignment;
@@ -190,5 +193,11 @@ public class Patient {
         return score;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", patientName);
+        return json;
+    }
 
 }
