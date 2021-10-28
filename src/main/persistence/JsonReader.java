@@ -11,6 +11,9 @@ import java.util.stream.Stream;
 import model.Patient;
 import org.json.*;
 
+// This class references code from this repo
+// Link: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
 // represents a  reader that reads list of patients from JSON data stored in file
 public class JsonReader {
     private String source;

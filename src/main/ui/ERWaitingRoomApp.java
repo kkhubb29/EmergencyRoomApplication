@@ -281,7 +281,7 @@ public class ERWaitingRoomApp {
         System.out.println("\twaiting room");
     }
 
-    // EFFECTS: saves the workroom to file
+    // EFFECTS: saves the list of patients to file
     private void saveListOfPatients() {
         try {
             jsonWriter.open();
@@ -294,7 +294,7 @@ public class ERWaitingRoomApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads workroom from file
+    // EFFECTS: loads list of patients from file
     private void loadListOfPatients() {
         try {
             erPatients = jsonReader.read();

@@ -14,7 +14,7 @@ public class ListOfPatients implements Writable {
     private String name;
     private ArrayList<Patient> patients;
 
-    // EFFECTS: list is empty
+    // EFFECTS: constructs a list of patients with a name and empty list
     public ListOfPatients(String name) {
         this.name = name;
         patients = new ArrayList<>();
@@ -95,7 +95,7 @@ public class ListOfPatients implements Writable {
         return json;
     }
 
-    // EFFECTS: returns things in this workroom as a JSON array
+    // EFFECTS: returns patients in this list of patients as a JSON array
     private JSONArray patientsToJson() {
         JSONArray jsonArray = new JSONArray();
 
