@@ -213,7 +213,7 @@ public class ERWaitingRoomApp {
             doAssignPatient();
         } else if (command.equals("v")) {
             doViewList();
-        } else if (command.equals("save")) {
+        } else if (command.equals("f")) {
             saveListOfPatients();
         } else if (command.equals("l")) {
             loadListOfPatients();

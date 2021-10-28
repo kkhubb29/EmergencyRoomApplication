@@ -61,7 +61,11 @@ public class JsonReader {
     // EFFECTS: parses patient from JSON object and adds it to list of patients
     private void addPatient(ListOfPatients lp, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
+        int score = jsonObject.getInt("score");
+        String assignment = jsonObject.getString("assignment");
         Patient patient = new Patient(name);
+        patient.setScore(score);
+        patient.setAssignment(assignment);
         lp.addPatient(patient);
     }
 }

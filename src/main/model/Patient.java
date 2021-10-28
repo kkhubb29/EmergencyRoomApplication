@@ -197,6 +197,8 @@ public class Patient implements Writable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", patientName);
+        json.put("score", score);
+        json.put("assignment", assignment);
         return json;
     }
 

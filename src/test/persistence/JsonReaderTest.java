@@ -44,8 +44,8 @@ class JsonReaderTest extends JsonTest {
             assertEquals("ER Patients", lp.getName());
             List<Patient> patients = lp.getPatients();
             assertEquals(2, patients.size());
-            checkPatient("Jane", patients.get(0));
-            checkPatient("May", patients.get(1));
+            checkPatient("Jane", 0, "waiting room", patients.get(0));
+            checkPatient("May", 23, "doctor", patients.get(1));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

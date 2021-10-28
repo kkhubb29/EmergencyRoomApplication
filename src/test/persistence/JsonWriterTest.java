@@ -25,7 +25,10 @@ class JsonWriterTest extends JsonTest {
     void runBefore() {
         testListOfPatients = new ListOfPatients("test list");
         p1 = new Patient("Jane");
+        p1.setAssignment("waiting room");
         p2 = new Patient("May");
+        p2.setAssignment("doctor");
+        p2.setScore(23);
         p3 = new Patient("Selina");
         p4 = new Patient("Greg");
         p5 = new Patient("Henry");
@@ -64,21 +67,21 @@ class JsonWriterTest extends JsonTest {
     @Test
     void testWriterGeneralListOfPatients() {
         try {
-            ListOfPatients lp = new ListOfPatients("My work room");
+            ListOfPatients lp = new ListOfPatients("ER Patients");
             lp.addPatient(p1);
             lp.addPatient(p2);
-            JsonWriter writer = new JsonWriter("./data/testWriterGeneralWorkroom.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralListOfPatients.json");
             writer.open();
             writer.write(lp);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterGeneralWorkroom.json");
+            JsonReader reader = new JsonReader("./data/testWriterGeneralListOfPatients.json");
             lp = reader.read();
-            assertEquals("My work room", lp.getName());
+            assertEquals("ER Patients", lp.getName());
             ArrayList<Patient> patients = lp.getListOfPatients();
             assertEquals(2, patients.size());
-            checkPatient("Jane", patients.get(0));
-            checkPatient("May", patients.get(1));
+            checkPatient("Jane", 0, "waiting room", patients.get(0));
+            checkPatient("May", 23, "doctor", patients.get(1));
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");

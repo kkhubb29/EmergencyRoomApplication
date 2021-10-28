@@ -1,10 +1,14 @@
 {
   "patients": [
     {
-      "name": "Jane"
+      "name": "Jane",
+      "score": 0,
+      "assignment": "waiting room"
     },
     {
-      "name": "May"
+      "name": "May",
+      "score": 23,
+      "assignment": "doctor"
     }
   ],
   "name": "ER Patients"
