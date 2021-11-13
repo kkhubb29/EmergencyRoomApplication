@@ -17,9 +17,6 @@ class JsonWriterTest extends JsonTest {
     private ListOfPatients testListOfPatients;
     Patient p1;
     Patient p2;
-    Patient p3;
-    Patient p4;
-    Patient p5;
 
     @BeforeEach
     void runBefore() {
@@ -29,9 +26,12 @@ class JsonWriterTest extends JsonTest {
         p2 = new Patient("May");
         p2.setAssignment("doctor");
         p2.setScore(23);
-        p3 = new Patient("Selina");
-        p4 = new Patient("Greg");
-        p5 = new Patient("Henry");
+        p2.setTroubleBreathing("y");
+        p2.setChestPain("n");
+        p2.setBleeding("y");
+        p2.setNauseous("y");
+        p2.setHeadInjury("y");
+        p2.setPregnant("n");
     }
 
     @Test
@@ -80,8 +80,11 @@ class JsonWriterTest extends JsonTest {
             assertEquals("ER Patients", lp.getName());
             ArrayList<Patient> patients = lp.getListOfPatients();
             assertEquals(2, patients.size());
-            checkPatient("Jane", 0, "waiting room", patients.get(0));
-            checkPatient("May", 23, "doctor", patients.get(1));
+            checkPatient("Jane", 0, "waiting room", "not entered",
+                    "not entered", "not entered", "not entered",
+                    "not entered", "not entered", patients.get(0));
+            checkPatient("May", 23, "doctor", "y", "n", "y",
+                    "y", "y", "n", patients.get(1));
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");

@@ -66,9 +66,21 @@ public class JsonReader {
         String name = jsonObject.getString("name");
         int score = jsonObject.getInt("score");
         String assignment = jsonObject.getString("assignment");
+        String troubleBreathing = jsonObject.getString("trouble breathing");
+        String chestPain = jsonObject.getString("chest pain");
+        String bleeding = jsonObject.getString("bleeding");
+        String nauseous = jsonObject.getString("nauseous");
+        String headInjury = jsonObject.getString("head injury");
+        String pregnant = jsonObject.getString("pregnant");
         Patient patient = new Patient(name);
         patient.setScore(score);
         patient.setAssignment(assignment);
+        patient.setTroubleBreathing(troubleBreathing);
+        patient.setChestPain(chestPain);
+        patient.setBleeding(bleeding);
+        patient.setNauseous(nauseous);
+        patient.setHeadInjury(headInjury);
+        patient.setPregnant(pregnant);
         lp.addPatient(patient);
     }
 }

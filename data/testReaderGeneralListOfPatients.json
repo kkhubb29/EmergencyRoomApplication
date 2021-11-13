@@ -3,12 +3,24 @@
     {
       "name": "Jane",
       "score": 0,
-      "assignment": "waiting room"
+      "assignment": "waiting room",
+      "trouble breathing": "not entered",
+      "chest pain": "not entered",
+      "bleeding": "not entered",
+      "nauseous": "not entered",
+      "head injury": "not entered",
+      "pregnant" : "not entered"
     },
     {
       "name": "May",
       "score": 23,
-      "assignment": "doctor"
+      "assignment": "doctor",
+      "trouble breathing": "y",
+      "chest pain": "n",
+      "bleeding": "y",
+      "nauseous": "y",
+      "head injury": "y",
+      "pregnant" : "n"
     }
   ],
   "name": "ER Patients"

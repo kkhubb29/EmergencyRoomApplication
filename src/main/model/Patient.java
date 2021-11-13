@@ -36,13 +36,13 @@ public class Patient implements Writable {
         assignment = "waiting room";
         age = 5;
         pain = 0;
-        troubleBreathing = "n";
-        chestPain = "n";
-        bleeding = "n";
-        nauseous = "n";
-        brokenBone = "n";
-        headInjury = "n";
-        pregnant = "n";
+        troubleBreathing = "not entered";
+        chestPain = "not entered";
+        bleeding = "not entered";
+        nauseous = "not entered";
+        brokenBone = "not entered";
+        headInjury = "not entered";
+        pregnant = "not entered";
     }
 
     public String getPatientName() {
@@ -199,6 +199,12 @@ public class Patient implements Writable {
         json.put("name", patientName);
         json.put("score", score);
         json.put("assignment", assignment);
+        json.put("trouble breathing", troubleBreathing);
+        json.put("chest pain", chestPain);
+        json.put("bleeding", bleeding);
+        json.put("nauseous", nauseous);
+        json.put("head injury", headInjury);
+        json.put("pregnant", pregnant);
         return json;
     }
 

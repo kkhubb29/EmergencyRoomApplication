@@ -21,13 +21,13 @@ public class PatientTest {
         assertEquals("waiting room", testPatient.getAssignment());
         assertEquals(5, testPatient.getAge());
         assertEquals(0, testPatient.getPain());
-        assertEquals("n", testPatient.getTroubleBreathing());
-        assertEquals("n", testPatient.getChestPain());
-        assertEquals("n", testPatient.getBleeding());
-        assertEquals("n", testPatient.getNauseous());
-        assertEquals("n", testPatient.getBrokenBone());
-        assertEquals("n", testPatient.getHeadInjury());
-        assertEquals("n", testPatient.getPregnant());
+        assertEquals("not entered", testPatient.getTroubleBreathing());
+        assertEquals("not entered", testPatient.getChestPain());
+        assertEquals("not entered", testPatient.getBleeding());
+        assertEquals("not entered", testPatient.getNauseous());
+        assertEquals("not entered", testPatient.getBrokenBone());
+        assertEquals("not entered", testPatient.getHeadInjury());
+        assertEquals("not entered", testPatient.getPregnant());
     }
 
 

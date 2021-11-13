@@ -19,6 +19,7 @@ public class ERWaitingRoomApp {
     private Scanner input;
     private ListOfPatients erPatients;
     Patient p1;
+    Patient p2;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
@@ -92,35 +93,35 @@ public class ERWaitingRoomApp {
         System.out.println("Name?");
         String namePatient = input.next();
         p1 = new Patient(namePatient);
-        displayAgeQuestion();
-        displayPainQuestion();
-        displayTroubleBreathingQuestion();
-        displayChestPainQuestion();
-        displayBleedingQuestion();
-        displayNauseousQuestion();
-        displayHeadInjuryQuestion();
-        displayPregnantQuestion();
+        displayAgeQuestionPatient();
+        displayPainQuestionPatient();
+        displayTroubleBreathingQuestionPatient();
+        displayChestPainQuestionPatient();
+        displayBleedingQuestionPatient();
+        displayNauseousQuestionPatient();
+        displayHeadInjuryQuestionPatient();
+        displayPregnantQuestionPatient();
         p1.setScore(p1.calculateScore());
         erPatients.addPatient(p1);
         System.out.println("\nThank you for filling out the form we will be with you shortly!");
     }
 
     // EFFECTS: displays age question to user and records answer
-    public void displayAgeQuestion() {
+    public void displayAgeQuestionPatient() {
         System.out.println("Age?");
         int agePatient = input.nextInt();
         p1.setAge(agePatient);
     }
 
     // EFFECTS: displays pain question to user and records answer
-    public void displayPainQuestion() {
+    public void displayPainQuestionPatient() {
         System.out.println("What is your pain on a scale of 0-10?");
         int painPatient = input.nextInt();
         p1.setPain(painPatient);
     }
 
     // EFFECTS: displays trouble breathing question to user and records answer
-    public void displayTroubleBreathingQuestion() {
+    public void displayTroubleBreathingQuestionPatient() {
         System.out.println("Are you having trouble breathing (y/n)?");
         String troubleBreathingPatient = input.next();
         troubleBreathingPatient = troubleBreathingPatient.toLowerCase();
@@ -128,7 +129,7 @@ public class ERWaitingRoomApp {
     }
 
     // EFFECTS: displays chest pain question to user and records answer
-    public void displayChestPainQuestion() {
+    public void displayChestPainQuestionPatient() {
         System.out.println("Are you experiencing chest pains (y/n)?");
         String chestPainPatient = input.next();
         chestPainPatient = chestPainPatient.toLowerCase();
@@ -136,7 +137,7 @@ public class ERWaitingRoomApp {
     }
 
     // EFFECTS: displays bleeding question to user and records answer
-    public void displayBleedingQuestion() {
+    public void displayBleedingQuestionPatient() {
         System.out.println("Are you bleeding (y/n)?");
         String bleedingPatient = input.next();
         bleedingPatient = bleedingPatient.toLowerCase();
@@ -144,7 +145,7 @@ public class ERWaitingRoomApp {
     }
 
     // EFFECTS: displays nauseous question to user and records answer
-    public void displayNauseousQuestion() {
+    public void displayNauseousQuestionPatient() {
         System.out.println("Are you nauseous (y/n)?");
         String nauseousPatient = input.next();
         nauseousPatient = nauseousPatient.toLowerCase();
@@ -152,7 +153,7 @@ public class ERWaitingRoomApp {
     }
 
     // EFFECTS: displays head injury question to user and records answer
-    public void displayHeadInjuryQuestion() {
+    public void displayHeadInjuryQuestionPatient() {
         System.out.println("Do you have a head injury (y/n)?");
         String headInjuryPatient = input.next();
         headInjuryPatient = headInjuryPatient.toLowerCase();
@@ -160,7 +161,7 @@ public class ERWaitingRoomApp {
     }
 
     // EFFECTS: displays pregnant question to user and records answer
-    public void displayPregnantQuestion() {
+    public void displayPregnantQuestionPatient() {
         System.out.println("Are you pregnant (y/n)?");
         String pregnantPatient = input.next();
         pregnantPatient = pregnantPatient.toLowerCase();
@@ -225,10 +226,92 @@ public class ERWaitingRoomApp {
     // MODIFIES: this
     // EFFECTS: conducts adding a patient to the list
     private void doAddPatient() {
+        String command = null;
         System.out.println("What is the name of the patient you would like to add?");
         String namePatient = input.next();
-        Patient p1 = new Patient(namePatient);
-        erPatients.addPatient(p1);
+        p2 = new Patient(namePatient);
+        System.out.println("Would you like to fill out the patient questionnaire (y/n)?");
+        command = input.next();
+        command = command.toLowerCase();
+        if (command.equals("y")) {
+            fillInQuestionnaire();
+        }
+        p2.setScore(p2.calculateScore());
+        erPatients.addPatient(p2);
+    }
+
+    public void fillInQuestionnaire() {
+        displayAgeQuestionErCoordinator();
+        displayPainQuestionErCoordinator();
+        displayTroubleBreathingQuestionErCoordinator();
+        displayChestPainQuestionErCoordinator();
+        displayBleedingQuestionErCoordinator();
+        displayNauseousQuestionErCoordinator();
+        displayHeadInjuryQuestionErCoordinator();
+        displayPregnantQuestionErCoordinator();
+    }
+
+
+    // EFFECTS: displays age question to user and records answer
+    public void displayAgeQuestionErCoordinator() {
+        System.out.println("How old is the patient?");
+        int agePatient = input.nextInt();
+        p2.setAge(agePatient);
+    }
+
+    // EFFECTS: displays pain question to user and records answer
+    public void displayPainQuestionErCoordinator() {
+        System.out.println("What is the patient's pain on a scale of 0-10?");
+        int painPatient = input.nextInt();
+        p2.setPain(painPatient);
+    }
+
+    // EFFECTS: displays trouble breathing question to user and records answer
+    public void displayTroubleBreathingQuestionErCoordinator() {
+        System.out.println("Is the patient having trouble breathing (y/n)?");
+        String troubleBreathingPatient = input.next();
+        troubleBreathingPatient = troubleBreathingPatient.toLowerCase();
+        p2.setTroubleBreathing(troubleBreathingPatient);
+    }
+
+    // EFFECTS: displays chest pain question to user and records answer
+    public void displayChestPainQuestionErCoordinator() {
+        System.out.println("Is the patient experiencing chest pains (y/n)?");
+        String chestPainPatient = input.next();
+        chestPainPatient = chestPainPatient.toLowerCase();
+        p2.setChestPain(chestPainPatient);
+    }
+
+    // EFFECTS: displays bleeding question to user and records answer
+    public void displayBleedingQuestionErCoordinator() {
+        System.out.println("Is the patient bleeding (y/n)?");
+        String bleedingPatient = input.next();
+        bleedingPatient = bleedingPatient.toLowerCase();
+        p2.setBleeding(bleedingPatient);
+    }
+
+    // EFFECTS: displays nauseous question to user and records answer
+    public void displayNauseousQuestionErCoordinator() {
+        System.out.println("Is the patient nauseous (y/n)?");
+        String nauseousPatient = input.next();
+        nauseousPatient = nauseousPatient.toLowerCase();
+        p2.setNauseous(nauseousPatient);
+    }
+
+    // EFFECTS: displays head injury question to user and records answer
+    public void displayHeadInjuryQuestionErCoordinator() {
+        System.out.println("Does the patient have a head injury (y/n)?");
+        String headInjuryPatient = input.next();
+        headInjuryPatient = headInjuryPatient.toLowerCase();
+        p2.setHeadInjury(headInjuryPatient);
+    }
+
+    // EFFECTS: displays pregnant question to user and records answer
+    public void displayPregnantQuestionErCoordinator() {
+        System.out.println("Is the patient pregnant (y/n)?");
+        String pregnantPatient = input.next();
+        pregnantPatient = pregnantPatient.toLowerCase();
+        p2.setPregnant(pregnantPatient);
     }
 
     // MODIFIES: this
@@ -250,6 +333,13 @@ public class ERWaitingRoomApp {
             int j = i + 1;
             System.out.println(j + " - " + patientsList.get(i).getPatientName() + ", "
                     + patientsList.get(i).getAssignment() + ", score:" + patientsList.get(i).getScore());
+            System.out.println("\ttrouble breathing:" + patientsList.get(i).getTroubleBreathing());
+            System.out.println("\tchest pain:" + patientsList.get(i).getChestPain());
+            System.out.println("\tbleeding:" + patientsList.get(i).getBleeding());
+            System.out.println("\tnauseous:" + patientsList.get(i).getNauseous());
+            System.out.println("\tbroken bone:" + patientsList.get(i).getBrokenBone());
+            System.out.println("\thead injury:" + patientsList.get(i).getHeadInjury());
+            System.out.println("\tpregnant:" + patientsList.get(i).getPregnant());
         }
     }
 
