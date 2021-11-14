@@ -1,3 +1,4 @@
+/*
 package ui;
 
 import javax.swing.AbstractButton;
@@ -56,11 +57,13 @@ public class StartScreen extends JPanel
         }
     }
 
-    /**
+    */
+/**
      * Create the GUI and show it.  For thread safety,
      * this method should be invoked from the
      * event-dispatching thread.
-     */
+     *//*
+
     private static void createAndShowGUI() {
 
         //Create and set up the window.
@@ -68,7 +71,7 @@ public class StartScreen extends JPanel
         erApplication.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.
-        ERPatients newContentPane = new ERPatients();
+        ERPatientsTable newContentPane = new ERPatientsTable();
         newContentPane.setOpaque(true); //content panes must be opaque
         erApplication.setContentPane(newContentPane);
 
@@ -88,3 +91,4 @@ public class StartScreen extends JPanel
     }
 }
 
+*/

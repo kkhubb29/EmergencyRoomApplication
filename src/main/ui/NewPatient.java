@@ -1,5 +1,7 @@
 package ui;
 
+import com.sun.org.apache.bcel.internal.generic.InstructionListObserver;
+import model.ListOfPatients;
 import model.Patient;
 
 import javax.swing.*;
@@ -8,17 +10,27 @@ import java.awt.event.*;
 
 import static java.lang.Integer.parseInt;
 
-public class NewPatient extends JPanel implements ActionListener{
+public class NewPatient extends JPanel implements ActionListener {
 
     protected JButton submitButton;
-    protected JRadioButton troubleBreathingButton, chestPainButton, bleedingButton, nauseousButton, headInjuryButton,
-            pregnantButton;
-    protected JTextField nameField, ageField, painField;
+    protected JRadioButton troubleBreathingButton;
+    protected JRadioButton chestPainButton;
+    protected JRadioButton bleedingButton;
+    protected JRadioButton nauseousButton;
+    protected JRadioButton headInjuryButton;
+    protected JRadioButton pregnantButton;
+    protected JTextField nameField;
+    protected JTextField ageField;
+    protected JTextField painField;
     protected JTextArea textArea;
-    protected JLabel nameLabel, ageLabel, painLabel;
+    protected JLabel nameLabel;
+    protected JLabel ageLabel;
+    protected JLabel painLabel;
     Patient p1;
+    private ListOfPatients myList;
 
-    public NewPatient() {
+    public NewPatient(ListOfPatients lop) {
+        this.myList = lop;
 
         nameLabel = new JLabel();
         nameLabel.setText("Name? ");
@@ -98,55 +110,48 @@ public class NewPatient extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if ("Submit".equals(e.getActionCommand())) {
             String nameText = nameField.getText();
-            System.out.println(nameText);
             p1 = new Patient(nameText);
-
             String ageText = ageField.getText();
-            System.out.println(parseInt(ageText));
             p1.setAge(parseInt(ageText));
-
             String painText = painField.getText();
-            System.out.println(parseInt(painText));
             p1.setPain(parseInt(painText));
-
             if (troubleBreathingButton.isSelected()) {
                 p1.setTroubleBreathing("y");
-                System.out.println("y");
             } else {
                 p1.setTroubleBreathing("n");
             }
-
             if (chestPainButton.isSelected()) {
                 p1.setChestPain("y");
             } else {
                 p1.setChestPain("n");
             }
-
             if (bleedingButton.isSelected()) {
                 p1.setBleeding("y");
             } else {
                 p1.setBleeding("n");
             }
-
             if (nauseousButton.isSelected()) {
                 p1.setNauseous("y");
             } else {
                 p1.setNauseous("n");
             }
-
             if (headInjuryButton.isSelected()) {
                 p1.setHeadInjury("y");
             } else {
                 p1.setHeadInjury("n");
             }
-
             if (pregnantButton.isSelected()) {
                 p1.setPregnant("y");
             } else {
                 p1.setPregnant("n");
             }
-
+            myList.addPatient(p1);
         }
+        returnListOfPatients();
+    }
+
+    public ListOfPatients returnListOfPatients() {
+        return myList;
     }
 
 }
