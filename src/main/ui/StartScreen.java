@@ -1,4 +1,5 @@
 /*
+
 package ui;
 
 import javax.swing.AbstractButton;
@@ -57,12 +58,14 @@ public class StartScreen extends JPanel
         }
     }
 
-    */
+
+*/
 /**
      * Create the GUI and show it.  For thread safety,
      * this method should be invoked from the
      * event-dispatching thread.
      *//*
+
 
     private static void createAndShowGUI() {
 
@@ -90,5 +93,6 @@ public class StartScreen extends JPanel
         });
     }
 }
+
 
 */

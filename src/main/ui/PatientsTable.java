@@ -28,7 +28,6 @@ public class PatientsTable extends JPanel {
         JPanel panel = new JPanel();
         panel.add(scrollPane);
         add(panel, BorderLayout.CENTER);
-
     }
 
 
