@@ -1,3 +1,4 @@
+/*
 package ui;
 
 import com.sun.org.apache.bcel.internal.generic.InstructionListObserver;
@@ -156,3 +157,4 @@ public class NewPatient extends JPanel implements ActionListener {
 
 }
 
+*/

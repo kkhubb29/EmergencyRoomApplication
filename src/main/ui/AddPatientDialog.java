@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 
 import static java.lang.Integer.parseInt;
 
-public class AddPatientDialog extends JDialog implements ActionListener{
+public class AddPatientDialog extends JDialog implements ActionListener {
 
     protected JButton submitButton;
     protected JRadioButton troubleBreathingButton;
@@ -32,6 +32,69 @@ public class AddPatientDialog extends JDialog implements ActionListener{
     public AddPatientDialog(Frame parent) {
         super(parent, "Add Patient", true);
 
+        createLabels();
+        createFields();
+
+        createTroubleBreathingButton();
+        createChestPainButton();
+        createBleedingButton();
+        createNauseousButton();
+        createHeadInjuryButton();
+        createPregnantButton();
+
+        createSubmitButton();
+
+        submitButton.addActionListener(this);
+
+        createToolTips();
+
+        //Add Components to this container, using the default FlowLayout.
+
+        //      JPanel panel = new JPanel(new SpringLayout());
+//       panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+
+        buildQuestionnaire();
+
+
+    }
+
+    public void createTroubleBreathingButton() {
+        troubleBreathingButton = new JRadioButton("Are you having trouble breathing?");
+        troubleBreathingButton.setVerticalTextPosition(AbstractButton.CENTER);
+        troubleBreathingButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
+    }
+
+    public void createChestPainButton() {
+        chestPainButton = new JRadioButton("Are you experiencing chest pains?");
+        chestPainButton.setVerticalTextPosition(AbstractButton.CENTER);
+        chestPainButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
+    }
+
+    public void createBleedingButton() {
+        bleedingButton = new JRadioButton("Are you bleeding?");
+        bleedingButton.setVerticalTextPosition(AbstractButton.CENTER);
+        bleedingButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
+    }
+
+    public void createNauseousButton() {
+        nauseousButton = new JRadioButton("Are you nauseous?");
+        nauseousButton.setVerticalTextPosition(AbstractButton.CENTER);
+        nauseousButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
+    }
+
+    public void createHeadInjuryButton() {
+        headInjuryButton = new JRadioButton("Do you have a head injury?");
+        headInjuryButton.setVerticalTextPosition(AbstractButton.CENTER);
+        headInjuryButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
+    }
+
+    public void createPregnantButton() {
+        pregnantButton = new JRadioButton("Are you pregnant?");
+        pregnantButton.setVerticalTextPosition(AbstractButton.CENTER);
+        pregnantButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
+    }
+
+    public void createLabels() {
         nameLabel = new JLabel();
         nameLabel.setText("Name? ");
 
@@ -40,34 +103,9 @@ public class AddPatientDialog extends JDialog implements ActionListener{
 
         painLabel = new JLabel();
         painLabel.setText("What is your pain level on a scale of 1-10? ");
+    }
 
-        troubleBreathingButton = new JRadioButton("Are you having trouble breathing?");
-        troubleBreathingButton.setVerticalTextPosition(AbstractButton.CENTER);
-        troubleBreathingButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
-
-        chestPainButton = new JRadioButton("Are you experiencing chest pains?");
-        chestPainButton.setVerticalTextPosition(AbstractButton.CENTER);
-        chestPainButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
-
-
-        bleedingButton = new JRadioButton("Are you bleeding?");
-        bleedingButton.setVerticalTextPosition(AbstractButton.CENTER);
-        bleedingButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
-
-        nauseousButton = new JRadioButton("Are you nauseous?");
-        nauseousButton.setVerticalTextPosition(AbstractButton.CENTER);
-        nauseousButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
-
-        headInjuryButton = new JRadioButton("Do you have a head injury?");
-        headInjuryButton.setVerticalTextPosition(AbstractButton.CENTER);
-        headInjuryButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
-
-
-        pregnantButton = new JRadioButton("Are you pregnant?");
-        pregnantButton.setVerticalTextPosition(AbstractButton.CENTER);
-        pregnantButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
-
-
+    public void createFields() {
         nameField = new JTextField(20);
         textArea = new JTextArea(1, 20);
         textArea.setEditable(true);
@@ -80,21 +118,26 @@ public class AddPatientDialog extends JDialog implements ActionListener{
         painField = new JTextField(20);
         textArea = new JTextArea(1, 20);
         textArea.setEditable(true);
+    }
 
+    public void createSubmitButton() {
         submitButton = new JButton("Submit");
         submitButton.setVerticalTextPosition(AbstractButton.CENTER);
         submitButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
         submitButton.setActionCommand("Submit");
+    }
 
-        submitButton.addActionListener(this);
+    public void createToolTips() {
+        troubleBreathingButton.setToolTipText("Select if you are having trouble breathing");
+        chestPainButton.setToolTipText("Select if you are experiencing chest pains");
+        bleedingButton.setToolTipText("Select if you are bleeding");
+        nauseousButton.setToolTipText("Select if you are nauseous");
+        headInjuryButton.setToolTipText("Select if you have a head injury");
+        pregnantButton.setToolTipText("Select if you are pregnant");
+        submitButton.setToolTipText("Click to submit questionnaire");
+    }
 
-        troubleBreathingButton.setToolTipText("Click this button if you are the ER Coordinator.");
-
-        //Add Components to this container, using the default FlowLayout.
-
-//        JPanel panel = new JPanel();
-//        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-
+    public void buildQuestionnaire() {
         add(nameLabel);
         add(nameField);
         add(ageLabel);
@@ -108,9 +151,9 @@ public class AddPatientDialog extends JDialog implements ActionListener{
         add(headInjuryButton);
         add(pregnantButton);
         add(submitButton);
-
     }
 
+    @SuppressWarnings("methodlength")
     public void actionPerformed(ActionEvent e) {
         if ("Submit".equals(e.getActionCommand())) {
             String nameText = nameField.getText();

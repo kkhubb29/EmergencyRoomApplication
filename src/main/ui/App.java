@@ -15,11 +15,13 @@ import javax.swing.*;
 import static javax.swing.BoxLayout.PAGE_AXIS;
 
 public class App extends JFrame implements ActionListener {
+
     private static final String JSON_STORE = "./data/listOfPatients.json";
-    private Scanner input;
+
+    static final String ERCOORDINATOR = "Card for ER Coordinator";
+    static final String NEWPATIENT = "Card for New Patients";
+
     private ListOfPatients erPatients;
-    Patient p1;
-    Patient p2;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
@@ -27,9 +29,8 @@ public class App extends JFrame implements ActionListener {
     protected JButton saveButton;
     protected JButton addPatientButton;
     protected JButton assignButton;
+    protected JButton removeButton;
 
-    final static String ERCOORDINATOR = "Card for ER Coordinator";
-    final static String NEWPATIENT = "Card for New Patients";
     JPanel cards; //a panel that uses CardLayout
 
     public App() throws FileNotFoundException {
@@ -37,8 +38,9 @@ public class App extends JFrame implements ActionListener {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         Patient p1 = new Patient("troy");
-//        erPatients.addPatient(p1);
-//        erPatients.addPatient(p1);
+        Patient p2 = new Patient("fred");
+        erPatients.addPatient(p1);
+        erPatients.addPatient(p2);
     }
 
     public void addComponentToPane(Container pane) {
@@ -50,11 +52,12 @@ public class App extends JFrame implements ActionListener {
 //        cb.addItemListener(this);
 //        comboBoxPane.add(cb);
 
-        addPatientButton = new JButton("Add Patient");
-        addPatientButton.setVerticalTextPosition(AbstractButton.CENTER);
-        addPatientButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
-        addPatientButton.setMnemonic(KeyEvent.VK_D);
-        addPatientButton.setActionCommand("Add Patient");
+        addAddPatientButton();
+//        addPatientButton = new JButton("Add Patient");
+//        addPatientButton.setVerticalTextPosition(AbstractButton.CENTER);
+//        addPatientButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
+//        addPatientButton.setMnemonic(KeyEvent.VK_D);
+//        addPatientButton.setActionCommand("Add Patient");
 
         //Create the "cards".
         PatientsTable card2 = new PatientsTable(erPatients);
@@ -69,37 +72,77 @@ public class App extends JFrame implements ActionListener {
         cards.add(card2, ERCOORDINATOR);
 //        cards.add(card1, NEWPATIENT);
 
-        loadButton = new JButton("Load");
-        loadButton.setVerticalTextPosition(AbstractButton.CENTER);
-        loadButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
-        loadButton.setMnemonic(KeyEvent.VK_D);
-        loadButton.setActionCommand("Load");
+        addLoadPatientButton();
 
-        saveButton = new JButton("Save");
-        saveButton.setVerticalTextPosition(AbstractButton.CENTER);
-        saveButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
-        saveButton.setMnemonic(KeyEvent.VK_D);
-        saveButton.setActionCommand("Save");
+        addSavePatientButton();
 
-        assignButton = new JButton("Assign");
-        assignButton.setVerticalTextPosition(AbstractButton.CENTER);
-        assignButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
-        assignButton.setMnemonic(KeyEvent.VK_D);
-        assignButton.setActionCommand("Assign");
+        addAssignPatientButton();
+
+        addRemovePatientButton();
 
         addPatientButton.addActionListener(this);
         loadButton.addActionListener(this);
         saveButton.addActionListener(this);
         assignButton.addActionListener(this);
+        removeButton.addActionListener(this);
+
+        createButtonToolTips();
 
 //        pane.add(comboBoxPane, BorderLayout.PAGE_START);
         pane.add(cards, BorderLayout.CENTER);
         pane.add(addPatientButton, BorderLayout.LINE_END);
         pane.add(loadButton, BorderLayout.AFTER_LAST_LINE);
         pane.add(saveButton, BorderLayout.LINE_START);
-        pane.add(assignButton,BorderLayout.PAGE_START);
+        pane.add(assignButton, BorderLayout.PAGE_START);
+        pane.add(removeButton, BorderLayout.BEFORE_LINE_BEGINS);
     }
 
+    public void addAddPatientButton() {
+        addPatientButton = new JButton("Add Patient");
+        addPatientButton.setVerticalTextPosition(AbstractButton.CENTER);
+        addPatientButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
+        addPatientButton.setMnemonic(KeyEvent.VK_D);
+        addPatientButton.setActionCommand("Add Patient");
+    }
+
+    public void addRemovePatientButton() {
+        removeButton = new JButton("Remove Patient");
+        removeButton.setVerticalTextPosition(AbstractButton.CENTER);
+        removeButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
+        removeButton.setMnemonic(KeyEvent.VK_D);
+        removeButton.setActionCommand("Remove Patient");
+    }
+
+    public void addAssignPatientButton() {
+        assignButton = new JButton("Assign");
+        assignButton.setVerticalTextPosition(AbstractButton.CENTER);
+        assignButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
+        assignButton.setMnemonic(KeyEvent.VK_D);
+        assignButton.setActionCommand("Assign");
+    }
+
+    public void addSavePatientButton() {
+        saveButton = new JButton("Save");
+        saveButton.setVerticalTextPosition(AbstractButton.CENTER);
+        saveButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
+        saveButton.setMnemonic(KeyEvent.VK_D);
+        saveButton.setActionCommand("Save");
+    }
+
+    public void addLoadPatientButton() {
+        loadButton = new JButton("Load");
+        loadButton.setVerticalTextPosition(AbstractButton.CENTER);
+        loadButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
+        loadButton.setMnemonic(KeyEvent.VK_D);
+        loadButton.setActionCommand("Load");
+    }
+
+    public void createButtonToolTips() {
+        addPatientButton.setToolTipText("Click to add a patient to the list");
+        removeButton.setToolTipText("Click to remove a patient from the list");
+        saveButton.setToolTipText("Click to save list");
+        loadButton.setToolTipText("Click to load list");
+    }
 
 
     public void itemStateChanged(ItemEvent evt) {
@@ -107,14 +150,6 @@ public class App extends JFrame implements ActionListener {
         cl.show(cards, (String) evt.getItem());
     }
 
-    public void actionPreformed(ActionEvent e) {
-        if ("Add Patient".equals(e.getActionCommand())) {
-            AddPatientDialog dlg = new AddPatientDialog(this);
-            dlg.setLayout(new BoxLayout(dlg, PAGE_AXIS));
-            Patient results = dlg.run();
-            erPatients.addPatient(results);
-        }
-    }
 
     /**
      * Create the GUI and show it.  For thread safety,
@@ -176,11 +211,7 @@ public class App extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if ("Add Patient".equals(ae.getActionCommand())) {
-            AddPatientDialog dlg = new AddPatientDialog(this);
-            dlg.setLayout(new FlowLayout());
-            Patient results = dlg.run();
-            System.out.println(results.getPatientName());
-            erPatients.addPatient(results);
+            doAddPatient();
         } else if ("Load".equals(ae.getActionCommand())) {
             try {
                 erPatients = jsonReader.read();
@@ -198,10 +229,31 @@ public class App extends JFrame implements ActionListener {
                 System.out.println("Unable to write to file: " + JSON_STORE);
             }
         } else if ("Assign".equals(ae.getActionCommand())) {
-            AssignPatientDialog dlg = new AssignPatientDialog(this);
-            dlg.setLayout(new FlowLayout());
-            String[] results = dlg.run();
-            erPatients.findPatient(results[0]).setAssignment(results[1]);;
+            doAssignPatient();
+        } else if ("Remove Patient".equals(ae.getActionCommand())) {
+            doRemovePatient();
         }
+    }
+
+    public void doAddPatient() {
+        AddPatientDialog dlg = new AddPatientDialog(this);
+        dlg.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+        Patient results = dlg.run();
+        System.out.println(results.getPatientName());
+        erPatients.addPatient(results);
+    }
+
+    public void doRemovePatient() {
+        RemovePatientDialog dlg = new RemovePatientDialog(this);
+        dlg.setLayout(new FlowLayout());
+        String[] results = dlg.run();
+        erPatients.removePatient(erPatients.findPatient(results[0]));
+    }
+
+    public void doAssignPatient() {
+        AssignPatientDialog dlg = new AssignPatientDialog(this);
+        dlg.setLayout(new FlowLayout());
+        String[] results = dlg.run();
+        erPatients.findPatient(results[0]).setAssignment(results[1]);
     }
 }
