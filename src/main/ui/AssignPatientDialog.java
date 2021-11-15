@@ -1,15 +1,11 @@
 package ui;
 
-import model.ListOfPatients;
-import model.Patient;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import static java.lang.Integer.parseInt;
-
+// creates the assign patient dialog to change the assignment of a patient from the list of patients
 public class AssignPatientDialog extends JDialog implements ActionListener {
     protected JButton submitButton;
     protected JTextField nameField;
@@ -20,6 +16,7 @@ public class AssignPatientDialog extends JDialog implements ActionListener {
 
     private String[] data;
 
+    // EFFECTS: constructs the assign patient dialog
     public AssignPatientDialog(Frame parent) {
         super(parent, "Assign Patient", true);
 
@@ -54,6 +51,8 @@ public class AssignPatientDialog extends JDialog implements ActionListener {
 
     }
 
+    // REQUIRES: the user to click the submit button
+    // EFFECTS: stores the answers to the questions and closes the window
     public void actionPerformed(ActionEvent e) {
         if ("Submit".equals(e.getActionCommand())) {
             String nameText = nameField.getText();
@@ -64,6 +63,7 @@ public class AssignPatientDialog extends JDialog implements ActionListener {
         dispose();
     }
 
+    // EFFECTS: displays the assign patient questions and returns the answers to the questions
     public String[] run() {
         this.setVisible(true);
         return data;

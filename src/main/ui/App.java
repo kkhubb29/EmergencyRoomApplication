@@ -9,11 +9,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 import javax.swing.*;
 
-import static javax.swing.BoxLayout.PAGE_AXIS;
-
+// the GUI for the ER Patients triage App
 public class App extends JFrame implements ActionListener {
 
     private static final String JSON_STORE = "./data/listOfPatients.json";
@@ -31,8 +29,9 @@ public class App extends JFrame implements ActionListener {
     protected JButton assignButton;
     protected JButton removeButton;
 
-    JPanel cards; //a panel that uses CardLayout
+    JPanel cards;
 
+    // EFFECTS: constructs a list of patients and runs er application
     public App() throws FileNotFoundException {
         erPatients = new ListOfPatients("ER Patients");
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -43,8 +42,8 @@ public class App extends JFrame implements ActionListener {
         erPatients.addPatient(p2);
     }
 
+    // EFFECTS: adds buttons and table to the screen
     public void addComponentToPane(Container pane) {
-        //Put the JComboBox in a JPanel to get a nicer look.
 //        JPanel comboBoxPane = new JPanel(); //use FlowLayout
 //        String comboBoxItems[] = {ERCOORDINATOR, NEWPATIENT};
 //        JComboBox cb = new JComboBox(comboBoxItems);
@@ -53,13 +52,7 @@ public class App extends JFrame implements ActionListener {
 //        comboBoxPane.add(cb);
 
         addAddPatientButton();
-//        addPatientButton = new JButton("Add Patient");
-//        addPatientButton.setVerticalTextPosition(AbstractButton.CENTER);
-//        addPatientButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
-//        addPatientButton.setMnemonic(KeyEvent.VK_D);
-//        addPatientButton.setActionCommand("Add Patient");
 
-        //Create the "cards".
         PatientsTable card2 = new PatientsTable(erPatients);
 
 
@@ -72,13 +65,10 @@ public class App extends JFrame implements ActionListener {
         cards.add(card2, ERCOORDINATOR);
 //        cards.add(card1, NEWPATIENT);
 
-        addLoadPatientButton();
-
-        addSavePatientButton();
-
-        addAssignPatientButton();
-
-        addRemovePatientButton();
+        createLoadPatientButton();
+        createSavePatientButton();
+        createAssignPatientButton();
+        createRemovePatientButton();
 
         addPatientButton.addActionListener(this);
         loadButton.addActionListener(this);
@@ -92,11 +82,12 @@ public class App extends JFrame implements ActionListener {
         pane.add(cards, BorderLayout.CENTER);
         pane.add(addPatientButton, BorderLayout.LINE_END);
         pane.add(loadButton, BorderLayout.AFTER_LAST_LINE);
-        pane.add(saveButton, BorderLayout.LINE_START);
         pane.add(assignButton, BorderLayout.PAGE_START);
         pane.add(removeButton, BorderLayout.BEFORE_LINE_BEGINS);
+        pane.add(saveButton, BorderLayout.PAGE_START);
     }
 
+    // EFFECTS: builds the add patient button
     public void addAddPatientButton() {
         addPatientButton = new JButton("Add Patient");
         addPatientButton.setVerticalTextPosition(AbstractButton.CENTER);
@@ -105,7 +96,8 @@ public class App extends JFrame implements ActionListener {
         addPatientButton.setActionCommand("Add Patient");
     }
 
-    public void addRemovePatientButton() {
+    // EFFECTS: builds the remove patient button
+    public void createRemovePatientButton() {
         removeButton = new JButton("Remove Patient");
         removeButton.setVerticalTextPosition(AbstractButton.CENTER);
         removeButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
@@ -113,7 +105,8 @@ public class App extends JFrame implements ActionListener {
         removeButton.setActionCommand("Remove Patient");
     }
 
-    public void addAssignPatientButton() {
+    // EFFECTS: builds the assign patient button
+    public void createAssignPatientButton() {
         assignButton = new JButton("Assign");
         assignButton.setVerticalTextPosition(AbstractButton.CENTER);
         assignButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
@@ -121,7 +114,8 @@ public class App extends JFrame implements ActionListener {
         assignButton.setActionCommand("Assign");
     }
 
-    public void addSavePatientButton() {
+    // EFFECTS: builds the save patients button
+    public void createSavePatientButton() {
         saveButton = new JButton("Save");
         saveButton.setVerticalTextPosition(AbstractButton.CENTER);
         saveButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
@@ -129,7 +123,8 @@ public class App extends JFrame implements ActionListener {
         saveButton.setActionCommand("Save");
     }
 
-    public void addLoadPatientButton() {
+    // EFFECTS: builds the load patient button
+    public void createLoadPatientButton() {
         loadButton = new JButton("Load");
         loadButton.setVerticalTextPosition(AbstractButton.CENTER);
         loadButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
@@ -137,6 +132,7 @@ public class App extends JFrame implements ActionListener {
         loadButton.setActionCommand("Load");
     }
 
+    // EFFECTS: builds text that appears when user hovers over buttons
     public void createButtonToolTips() {
         addPatientButton.setToolTipText("Click to add a patient to the list");
         removeButton.setToolTipText("Click to remove a patient from the list");
@@ -144,18 +140,13 @@ public class App extends JFrame implements ActionListener {
         loadButton.setToolTipText("Click to load list");
     }
 
+//    public void itemStateChanged(ItemEvent evt) {
+//        CardLayout cl = (CardLayout) (cards.getLayout());
+//        cl.show(cards, (String) evt.getItem());
+//    }
 
-    public void itemStateChanged(ItemEvent evt) {
-        CardLayout cl = (CardLayout) (cards.getLayout());
-        cl.show(cards, (String) evt.getItem());
-    }
 
-
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event dispatch thread.
-     */
+    // EFFECTS: creates the GUI and displays it to the user
     private static void createAndShowGUI() throws FileNotFoundException {
 
         try {
@@ -208,26 +199,15 @@ public class App extends JFrame implements ActionListener {
         });
     }
 
+    // EFFECTS: runs the response to when each button is clicked
     @Override
     public void actionPerformed(ActionEvent ae) {
         if ("Add Patient".equals(ae.getActionCommand())) {
             doAddPatient();
         } else if ("Load".equals(ae.getActionCommand())) {
-            try {
-                erPatients = jsonReader.read();
-                System.out.println("Loaded " + erPatients.getName() + " from " + JSON_STORE);
-            } catch (IOException e) {
-                System.out.println("Unable to read from file: " + JSON_STORE);
-            }
+            doLoadListOfPatients();
         } else if ("Save".equals(ae.getActionCommand())) {
-            try {
-                jsonWriter.open();
-                jsonWriter.write(erPatients);
-                jsonWriter.close();
-                System.out.println("Saved " + erPatients.getName() + " to " + JSON_STORE);
-            } catch (FileNotFoundException e) {
-                System.out.println("Unable to write to file: " + JSON_STORE);
-            }
+            doSaveListOfPatient();
         } else if ("Assign".equals(ae.getActionCommand())) {
             doAssignPatient();
         } else if ("Remove Patient".equals(ae.getActionCommand())) {
@@ -235,6 +215,8 @@ public class App extends JFrame implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: conducts adding a patient to the list
     public void doAddPatient() {
         AddPatientDialog dlg = new AddPatientDialog(this);
         dlg.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
@@ -243,6 +225,8 @@ public class App extends JFrame implements ActionListener {
         erPatients.addPatient(results);
     }
 
+    // MODIFIES: this
+    // EFFECTS: conducts removing a patient from the list
     public void doRemovePatient() {
         RemovePatientDialog dlg = new RemovePatientDialog(this);
         dlg.setLayout(new FlowLayout());
@@ -250,10 +234,36 @@ public class App extends JFrame implements ActionListener {
         erPatients.removePatient(erPatients.findPatient(results[0]));
     }
 
+    // MODIFIES: this
+    // EFFECTS: conducts assigning a patient
     public void doAssignPatient() {
         AssignPatientDialog dlg = new AssignPatientDialog(this);
         dlg.setLayout(new FlowLayout());
         String[] results = dlg.run();
         erPatients.findPatient(results[0]).setAssignment(results[1]);
     }
+
+    // EFFECTS: saves the list of patients to files
+    public void doSaveListOfPatient() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(erPatients);
+            jsonWriter.close();
+            System.out.println("Saved " + erPatients.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads list of patients from file
+    public void doLoadListOfPatients() {
+        try {
+            erPatients = jsonReader.read();
+            System.out.println("Loaded " + erPatients.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
 }

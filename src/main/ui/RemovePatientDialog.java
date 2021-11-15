@@ -1,14 +1,11 @@
 package ui;
 
-import model.Patient;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import static java.lang.Integer.parseInt;
-
+// creates the remove patient dialog to remove a patient from the list of patients
 public class RemovePatientDialog extends JDialog implements ActionListener {
 
     protected JButton submitButton;
@@ -18,6 +15,7 @@ public class RemovePatientDialog extends JDialog implements ActionListener {
 
     private String[] data;
 
+    // EFFECTS: constructs the remove patient dialog
     public RemovePatientDialog(Frame parent) {
         super(parent, "Remove Patient", true);
 
@@ -42,6 +40,8 @@ public class RemovePatientDialog extends JDialog implements ActionListener {
         add(submitButton);
     }
 
+    // REQUIRES: the user to click the submit button
+    // EFFECTS: stores the answer to the question and closes the window
     public void actionPerformed(ActionEvent e) {
         if ("Submit".equals(e.getActionCommand())) {
             String nameText = nameField.getText();
@@ -50,6 +50,7 @@ public class RemovePatientDialog extends JDialog implements ActionListener {
         dispose();
     }
 
+    // EFFECTS: displays the remove patient questions and returns the answer to the question
     public String[] run() {
         this.setVisible(true);
         return data;
