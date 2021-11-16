@@ -27,6 +27,7 @@ public class App extends JFrame implements ActionListener {
     protected JButton assignButton;
     protected JButton removeButton;
 
+    protected PatientsTable patients;
 
     // EFFECTS: initializes the app
     public App() throws FileNotFoundException {
@@ -73,15 +74,15 @@ public class App extends JFrame implements ActionListener {
         // EFFECTS: builds the table sub panel
 
         // EFFECTS: constructs a new table of patients
-        PatientsTable patients = new PatientsTable(erPatients);
+        patients = new PatientsTable(erPatients);
 
         // EFFECTS: adds the table of patients to the tablePanel
         tablePanel.add(patients);
 
         // EFFECTS: builds the main panel by adding the two subpanels to it
 
-        mainPanel.add(buttonsPanel);
         mainPanel.add(tablePanel);
+        mainPanel.add(buttonsPanel);
 
         // EFFECTS: adds the main panel to the container
         pane.add(mainPanel);
@@ -217,6 +218,7 @@ public class App extends JFrame implements ActionListener {
         Patient results = dlg.run();
         System.out.println(results.getPatientName());
         erPatients.addPatient(results);
+        patients.fireTableDataChanged();
     }
 
     // MODIFIES: this
@@ -226,6 +228,7 @@ public class App extends JFrame implements ActionListener {
         dlg.setLayout(new FlowLayout());
         String[] results = dlg.run();
         erPatients.removePatient(erPatients.findPatient(results[0]));
+        patients.fireTableDataChanged();
     }
 
     // MODIFIES: this
@@ -235,6 +238,7 @@ public class App extends JFrame implements ActionListener {
         dlg.setLayout(new FlowLayout());
         String[] results = dlg.run();
         erPatients.findPatient(results[0]).setAssignment(results[1]);
+        patients.fireTableDataChanged();
     }
 
     // EFFECTS: saves the list of patients to files
@@ -243,6 +247,7 @@ public class App extends JFrame implements ActionListener {
             jsonWriter.open();
             jsonWriter.write(erPatients);
             jsonWriter.close();
+            patients.fireTableDataChanged();
             System.out.println("Saved " + erPatients.getName() + " to " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
@@ -254,6 +259,7 @@ public class App extends JFrame implements ActionListener {
     public void doLoadListOfPatients() {
         try {
             erPatients = jsonReader.read();
+            patients.fireTableDataChanged();
             System.out.println("Loaded " + erPatients.getName() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);

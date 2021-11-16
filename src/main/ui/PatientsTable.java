@@ -29,6 +29,10 @@ public class PatientsTable extends JPanel {
         add(panel, BorderLayout.CENTER);
     }
 
+    public void fireTableDataChanged() {
+        tableModel.fireTableDataChanged();
+    }
+
 
 
 

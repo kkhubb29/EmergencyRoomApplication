@@ -207,9 +207,9 @@ public class AddPatientDialog extends JDialog implements ActionListener {
             } else {
                 p1.setPregnant("n");
             }
+            p1.setScore(p1.calculateScore());
         }
         dispose();
-        new PopUpImage();
     }
 
     // EFFECTS: displays the questionnaire and returns the new patient
