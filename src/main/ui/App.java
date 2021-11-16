@@ -9,15 +9,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import javax.swing.*;
 
 // the GUI for the ER Patients triage App
 public class App extends JFrame implements ActionListener {
 
     private static final String JSON_STORE = "./data/listOfPatients.json";
-
-    static final String ERCOORDINATOR = "Card for ER Coordinator";
-    static final String NEWPATIENT = "Card for New Patients";
 
     private ListOfPatients erPatients;
     private JsonWriter jsonWriter;
@@ -29,9 +27,8 @@ public class App extends JFrame implements ActionListener {
     protected JButton assignButton;
     protected JButton removeButton;
 
-    JPanel cards;
 
-    // EFFECTS: constructs a list of patients and runs er application
+    // EFFECTS: initializes the app
     public App() throws FileNotFoundException {
         erPatients = new ListOfPatients("ER Patients");
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -42,49 +39,53 @@ public class App extends JFrame implements ActionListener {
         erPatients.addPatient(p2);
     }
 
-    // EFFECTS: adds buttons and table to the screen
-    public void addComponentToPane(Container pane) {
-//        JPanel comboBoxPane = new JPanel(); //use FlowLayout
-//        String comboBoxItems[] = {ERCOORDINATOR, NEWPATIENT};
-//        JComboBox cb = new JComboBox(comboBoxItems);
-//        cb.setEditable(false);
-//        cb.addItemListener(this);
-//        comboBoxPane.add(cb);
+    // EFFECTS: Add the main panel to a container
+    public void addPanelToContainer(Container pane) {
 
-        PatientsTable card2 = new PatientsTable(erPatients);
+        // EFFECTS: creates two sub panels and one main one
+        JPanel buttonsPanel = new JPanel();
+        JPanel tablePanel = new JPanel();
+        JPanel mainPanel = new JPanel();
 
+        // EFFECTS: sets the layout on the mainPanel to be a vertical box layout
 
-//        NewPatient card1 = new NewPatient(erPatients);
-//        card1.setLayout(new BoxLayout(card1, BoxLayout.PAGE_AXIS));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-
-        //Create the panel that contains the "cards".
-        cards = new JPanel(new CardLayout());
-        cards.add(card2, ERCOORDINATOR);
-//        cards.add(card1, NEWPATIENT);
-
+        // EFFECTS: builds the buttons sub panel
+        // EFFECTS: creates the buttons, listeners and tooltips for the buttonsPanel
         createAddPatientButton();
         createLoadPatientButton();
         createSavePatientButton();
         createAssignPatientButton();
         createRemovePatientButton();
 
-        addPatientButton.addActionListener(this);
-        loadButton.addActionListener(this);
-        saveButton.addActionListener(this);
-        assignButton.addActionListener(this);
-        removeButton.addActionListener(this);
+        createActionListeners();
 
         createButtonToolTips();
 
+        // EFFECTS: adds the buttons to the buttonsPanel
+        buttonsPanel.add(addPatientButton);
+        buttonsPanel.add(assignButton);
+        buttonsPanel.add(removeButton);
+        buttonsPanel.add(loadButton);
+        buttonsPanel.add(saveButton);
 
-//        pane.add(comboBoxPane, BorderLayout.PAGE_START);
-        pane.add(cards, BorderLayout.CENTER);
-        pane.add(addPatientButton, BorderLayout.NORTH);
-        pane.add(loadButton, BorderLayout.WEST);
-        pane.add(assignButton, BorderLayout.EAST);
-        pane.add(removeButton, BorderLayout.SOUTH);
-        pane.add(saveButton, BorderLayout.AFTER_LAST_LINE);
+        // EFFECTS: builds the table sub panel
+
+        // EFFECTS: constructs a new table of patients
+        PatientsTable patients = new PatientsTable(erPatients);
+
+        // EFFECTS: adds the table of patients to the tablePanel
+        tablePanel.add(patients);
+
+        // EFFECTS: builds the main panel by adding the two subpanels to it
+
+        mainPanel.add(buttonsPanel);
+        mainPanel.add(tablePanel);
+
+        // EFFECTS: adds the main panel to the container
+        pane.add(mainPanel);
+
     }
 
 
@@ -93,7 +94,7 @@ public class App extends JFrame implements ActionListener {
         addPatientButton = new JButton("Add Patient");
         addPatientButton.setVerticalTextPosition(AbstractButton.CENTER);
         addPatientButton.setHorizontalTextPosition(AbstractButton.LEADING);
-        addPatientButton.setMnemonic(KeyEvent.VK_D);
+        addPatientButton.setMnemonic(KeyEvent.VK_A);
         addPatientButton.setActionCommand("Add Patient");
     }
 
@@ -102,7 +103,7 @@ public class App extends JFrame implements ActionListener {
         removeButton = new JButton("Remove Patient");
         removeButton.setVerticalTextPosition(AbstractButton.CENTER);
         removeButton.setHorizontalTextPosition(AbstractButton.LEADING);
-        removeButton.setMnemonic(KeyEvent.VK_D);
+        removeButton.setMnemonic(KeyEvent.VK_R);
         removeButton.setActionCommand("Remove Patient");
     }
 
@@ -111,7 +112,7 @@ public class App extends JFrame implements ActionListener {
         assignButton = new JButton("Assign");
         assignButton.setVerticalTextPosition(AbstractButton.CENTER);
         assignButton.setHorizontalTextPosition(AbstractButton.LEADING);
-        assignButton.setMnemonic(KeyEvent.VK_D);
+        assignButton.setMnemonic(KeyEvent.VK_G);
         assignButton.setActionCommand("Assign");
     }
 
@@ -120,7 +121,7 @@ public class App extends JFrame implements ActionListener {
         saveButton = new JButton("Save");
         saveButton.setVerticalTextPosition(AbstractButton.CENTER);
         saveButton.setHorizontalTextPosition(AbstractButton.LEADING);
-        saveButton.setMnemonic(KeyEvent.VK_D);
+        saveButton.setMnemonic(KeyEvent.VK_S);
         saveButton.setActionCommand("Save");
     }
 
@@ -129,7 +130,7 @@ public class App extends JFrame implements ActionListener {
         loadButton = new JButton("Load");
         loadButton.setVerticalTextPosition(AbstractButton.CENTER);
         loadButton.setHorizontalTextPosition(AbstractButton.LEADING);
-        loadButton.setMnemonic(KeyEvent.VK_D);
+        loadButton.setMnemonic(KeyEvent.VK_L);
         loadButton.setActionCommand("Load");
     }
 
@@ -141,29 +142,29 @@ public class App extends JFrame implements ActionListener {
         loadButton.setToolTipText("Click to load list");
     }
 
-//    public void itemStateChanged(ItemEvent evt) {
-//        CardLayout cl = (CardLayout) (cards.getLayout());
-//        cl.show(cards, (String) evt.getItem());
-//    }
-
+    // EFFECTS: creates action listeners for each button
+    public void createActionListeners() {
+        addPatientButton.addActionListener(this);
+        loadButton.addActionListener(this);
+        saveButton.addActionListener(this);
+        assignButton.addActionListener(this);
+        removeButton.addActionListener(this);
+    }
 
     // EFFECTS: creates the GUI and displays it to the user
     private static void createAndShowGUI() throws FileNotFoundException {
 
         try {
-            //Create and set up the window.
-            JFrame frame = new JFrame("CardLayoutDemo");
+            JFrame frame = new JFrame("ER Application");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            //Create and set up the content pane.
-            App demo = new App();
-            demo.addComponentToPane(frame.getContentPane());
+            App erPatients = new App();
+            erPatients.addPanelToContainer(frame);
 
-            //Display the window.
             frame.pack();
             frame.setVisible(true);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to rune application: file not found");
+            System.out.println("Unable to run application: file not found");
         }
     }
 
