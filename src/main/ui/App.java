@@ -51,8 +51,6 @@ public class App extends JFrame implements ActionListener {
 //        cb.addItemListener(this);
 //        comboBoxPane.add(cb);
 
-        addAddPatientButton();
-
         PatientsTable card2 = new PatientsTable(erPatients);
 
 
@@ -65,6 +63,7 @@ public class App extends JFrame implements ActionListener {
         cards.add(card2, ERCOORDINATOR);
 //        cards.add(card1, NEWPATIENT);
 
+        createAddPatientButton();
         createLoadPatientButton();
         createSavePatientButton();
         createAssignPatientButton();
@@ -78,20 +77,22 @@ public class App extends JFrame implements ActionListener {
 
         createButtonToolTips();
 
+
 //        pane.add(comboBoxPane, BorderLayout.PAGE_START);
         pane.add(cards, BorderLayout.CENTER);
-        pane.add(addPatientButton, BorderLayout.LINE_END);
-        pane.add(loadButton, BorderLayout.AFTER_LAST_LINE);
-        pane.add(assignButton, BorderLayout.PAGE_START);
-        pane.add(removeButton, BorderLayout.BEFORE_LINE_BEGINS);
-        pane.add(saveButton, BorderLayout.PAGE_START);
+        pane.add(addPatientButton, BorderLayout.NORTH);
+        pane.add(loadButton, BorderLayout.WEST);
+        pane.add(assignButton, BorderLayout.EAST);
+        pane.add(removeButton, BorderLayout.SOUTH);
+        pane.add(saveButton, BorderLayout.AFTER_LAST_LINE);
     }
 
+
     // EFFECTS: builds the add patient button
-    public void addAddPatientButton() {
+    public void createAddPatientButton() {
         addPatientButton = new JButton("Add Patient");
         addPatientButton.setVerticalTextPosition(AbstractButton.CENTER);
-        addPatientButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
+        addPatientButton.setHorizontalTextPosition(AbstractButton.LEADING);
         addPatientButton.setMnemonic(KeyEvent.VK_D);
         addPatientButton.setActionCommand("Add Patient");
     }
@@ -100,7 +101,7 @@ public class App extends JFrame implements ActionListener {
     public void createRemovePatientButton() {
         removeButton = new JButton("Remove Patient");
         removeButton.setVerticalTextPosition(AbstractButton.CENTER);
-        removeButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
+        removeButton.setHorizontalTextPosition(AbstractButton.LEADING);
         removeButton.setMnemonic(KeyEvent.VK_D);
         removeButton.setActionCommand("Remove Patient");
     }
@@ -109,7 +110,7 @@ public class App extends JFrame implements ActionListener {
     public void createAssignPatientButton() {
         assignButton = new JButton("Assign");
         assignButton.setVerticalTextPosition(AbstractButton.CENTER);
-        assignButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
+        assignButton.setHorizontalTextPosition(AbstractButton.LEADING);
         assignButton.setMnemonic(KeyEvent.VK_D);
         assignButton.setActionCommand("Assign");
     }
@@ -118,7 +119,7 @@ public class App extends JFrame implements ActionListener {
     public void createSavePatientButton() {
         saveButton = new JButton("Save");
         saveButton.setVerticalTextPosition(AbstractButton.CENTER);
-        saveButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
+        saveButton.setHorizontalTextPosition(AbstractButton.LEADING);
         saveButton.setMnemonic(KeyEvent.VK_D);
         saveButton.setActionCommand("Save");
     }
@@ -127,7 +128,7 @@ public class App extends JFrame implements ActionListener {
     public void createLoadPatientButton() {
         loadButton = new JButton("Load");
         loadButton.setVerticalTextPosition(AbstractButton.CENTER);
-        loadButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
+        loadButton.setHorizontalTextPosition(AbstractButton.LEADING);
         loadButton.setMnemonic(KeyEvent.VK_D);
         loadButton.setActionCommand("Load");
     }
@@ -150,7 +151,6 @@ public class App extends JFrame implements ActionListener {
     private static void createAndShowGUI() throws FileNotFoundException {
 
         try {
-
             //Create and set up the window.
             JFrame frame = new JFrame("CardLayoutDemo");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -168,11 +168,7 @@ public class App extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-
-
-        //* Use an appropriate Look and Feel *//*
         try {
-            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
         } catch (UnsupportedLookAndFeelException ex) {
             ex.printStackTrace();
@@ -183,11 +179,8 @@ public class App extends JFrame implements ActionListener {
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         }
-        //* Turn off metal's use of bold fonts *//*
         UIManager.put("swing.boldMetal", Boolean.FALSE);
 
-        //Schedule a job for the event dispatch thread:
-        //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 try {

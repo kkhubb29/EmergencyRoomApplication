@@ -209,6 +209,7 @@ public class AddPatientDialog extends JDialog implements ActionListener {
             }
         }
         dispose();
+        new PopUpImage();
     }
 
     // EFFECTS: displays the questionnaire and returns the new patient
