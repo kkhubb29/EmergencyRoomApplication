@@ -35,9 +35,14 @@ public class RemovePatientDialog extends JDialog implements ActionListener {
 
         submitButton.addActionListener(this);
 
-        add(nameLabel);
-        add(nameField);
-        add(submitButton);
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        panel.add(nameLabel);
+        panel.add(nameField);
+        panel.add(submitButton);
+
+        this.add(panel);
     }
 
     // REQUIRES: the user to click the submit button
@@ -52,6 +57,7 @@ public class RemovePatientDialog extends JDialog implements ActionListener {
 
     // EFFECTS: displays the remove patient questions and returns the answer to the question
     public String[] run() {
+        this.pack();
         this.setVisible(true);
         return data;
     }

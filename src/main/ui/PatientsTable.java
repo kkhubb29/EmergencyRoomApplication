@@ -15,8 +15,9 @@ public class PatientsTable extends JPanel {
     private JTable table;
     private ListOfPatients myList;
 
-    //EFFECTS: constructs a table
+    // EFFECTS: constructs a table
     public PatientsTable(ListOfPatients lop) {
+        lop.getListOfPatientsSorted();
         this.myList = lop;
         setBounds(10, 10, 400, 300);
         tableModel = new PatientTableModel(myList);
@@ -29,6 +30,8 @@ public class PatientsTable extends JPanel {
         add(panel, BorderLayout.CENTER);
     }
 
+    // MODIFIES: this
+    // EFFECTS: updates table
     public void fireTableDataChanged() {
         tableModel.fireTableDataChanged();
     }

@@ -20,21 +20,12 @@ public class AssignPatientDialog extends JDialog implements ActionListener {
     public AssignPatientDialog(Frame parent) {
         super(parent, "Assign Patient", true);
 
+
         data = new String[2];
 
-        nameLabel = new JLabel();
-        nameLabel.setText("What is the name of the patient you would like to assign? ");
+        createLabels();
 
-        assignLabel = new JLabel();
-        assignLabel.setText("Where would you like to assign this patient?");
-
-        nameField = new JTextField(20);
-        textArea = new JTextArea(1, 20);
-        textArea.setEditable(true);
-
-        assignField = new JTextField(20);
-        textArea = new JTextArea(1, 20);
-        textArea.setEditable(true);
+        createFields();
 
         submitButton = new JButton("Submit");
         submitButton.setVerticalTextPosition(AbstractButton.CENTER);
@@ -43,12 +34,37 @@ public class AssignPatientDialog extends JDialog implements ActionListener {
 
         submitButton.addActionListener(this);
 
-        add(nameLabel);
-        add(nameField);
-        add(assignLabel);
-        add(assignField);
-        add(submitButton);
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
+        panel.add(nameLabel);
+        panel.add(nameField);
+        panel.add(assignLabel);
+        panel.add(assignField);
+        panel.add(submitButton);
+
+        this.add(panel);
+
+    }
+
+    // EFFECTS: builds labels for name and assignment questions
+    public void createLabels() {
+        nameLabel = new JLabel();
+        nameLabel.setText("What is the name of the patient you would like to assign? ");
+
+        assignLabel = new JLabel();
+        assignLabel.setText("Where would you like to assign this patient?");
+    }
+
+    // EFFECTS: builds fields to enter text in for name and assignment question
+    public void createFields() {
+        nameField = new JTextField(20);
+        textArea = new JTextArea(1, 20);
+        textArea.setEditable(true);
+
+        assignField = new JTextField(20);
+        textArea = new JTextArea(1, 20);
+        textArea.setEditable(true);
     }
 
     // REQUIRES: the user to click the submit button
@@ -65,6 +81,7 @@ public class AssignPatientDialog extends JDialog implements ActionListener {
 
     // EFFECTS: displays the assign patient questions and returns the answers to the questions
     public String[] run() {
+        this.pack();
         this.setVisible(true);
         return data;
     }

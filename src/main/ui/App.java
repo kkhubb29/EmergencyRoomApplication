@@ -214,7 +214,7 @@ public class App extends JFrame implements ActionListener {
     // EFFECTS: conducts adding a patient to the list
     public void doAddPatient() {
         AddPatientDialog dlg = new AddPatientDialog(this);
-        dlg.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+        dlg.setLayout(new FlowLayout());
         Patient results = dlg.run();
         System.out.println(results.getPatientName());
         erPatients.addPatient(results);

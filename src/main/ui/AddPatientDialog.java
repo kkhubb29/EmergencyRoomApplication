@@ -34,6 +34,8 @@ public class AddPatientDialog extends JDialog implements ActionListener {
     public AddPatientDialog(Frame parent) {
         super(parent, "Add Patient", true);
 
+        // EFFECTS: creates the elements to be placed on the questionnaire panel in the dialog
+
         createLabels();
         createFields();
 
@@ -43,19 +45,23 @@ public class AddPatientDialog extends JDialog implements ActionListener {
         createNauseousButton();
         createHeadInjuryButton();
         createPregnantButton();
-
         createSubmitButton();
+
+        // EFFECTS: adds a listener to the submit button
 
         submitButton.addActionListener(this);
 
+        // EFFECTS: adds tool tips
+
         createToolTips();
 
-        //Add Components to this container, using the default FlowLayout.
+        //Add Creates the questionnaire panel and adds it to this dialog
 
-        //      JPanel panel = new JPanel(new SpringLayout());
-//       panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+        JPanel panel = new JPanel();
 
-        buildQuestionnaire();
+        buildQuestionnaire(panel);
+
+        this.add(panel);
 
 
     }
@@ -149,21 +155,22 @@ public class AddPatientDialog extends JDialog implements ActionListener {
         submitButton.setToolTipText("Click to submit questionnaire");
     }
 
-    // EFFECTS: adds the buttons, fields, and labels to the screen
-    public void buildQuestionnaire() {
-        add(nameLabel);
-        add(nameField);
-        add(ageLabel);
-        add(ageField);
-        add(painLabel);
-        add(painField);
-        add(troubleBreathingButton);
-        add(chestPainButton);
-        add(bleedingButton);
-        add(nauseousButton);
-        add(headInjuryButton);
-        add(pregnantButton);
-        add(submitButton);
+    // EFFECTS: adds the buttons, fields, and labels to the questionnaire panel
+    public void buildQuestionnaire(JPanel panel) {
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(nameLabel);
+        panel.add(nameField);
+        panel.add(ageLabel);
+        panel.add(ageField);
+        panel.add(painLabel);
+        panel.add(painField);
+        panel.add(troubleBreathingButton);
+        panel.add(chestPainButton);
+        panel.add(bleedingButton);
+        panel.add(nauseousButton);
+        panel.add(headInjuryButton);
+        panel.add(pregnantButton);
+        panel.add(submitButton);
     }
 
     // REQUIRES: the user to click the submit button
@@ -214,10 +221,8 @@ public class AddPatientDialog extends JDialog implements ActionListener {
 
     // EFFECTS: displays the questionnaire and returns the new patient
     public Patient run() {
+        this.pack();
         this.setVisible(true);
         return p1;
     }
 }
-
-
-
