@@ -6,11 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-// creates the load patients? dialog
+// creates the load patients dialog
 public class StartLoadDialog extends JDialog implements ActionListener {
     protected JButton yesButton;
     protected JButton noButton;
-    protected JLabel dialogText;
+    protected JLabel questionLabel;
 
     private boolean load;
 
@@ -21,8 +21,8 @@ public class StartLoadDialog extends JDialog implements ActionListener {
 
         load = false;
 
-        dialogText = new JLabel();
-        dialogText.setText("Would you like to load existing patients?");
+        questionLabel = new JLabel();
+        questionLabel.setText("Would you like to load existing patients?");
 
         createYestButton();
 
@@ -35,13 +35,13 @@ public class StartLoadDialog extends JDialog implements ActionListener {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        panel.add(dialogText);
+        panel.add(questionLabel);
         panel.add(buttons);
 
         this.add(panel);
-
     }
 
+    // EFFECTS: builds yes button
     public void createYestButton() {
         yesButton = new JButton("Yes");
         yesButton.setVerticalTextPosition(AbstractButton.CENTER);
@@ -51,6 +51,7 @@ public class StartLoadDialog extends JDialog implements ActionListener {
         yesButton.addActionListener(this);
     }
 
+    // EFFECTS: builds no button
     public void createNoButton() {
         noButton = new JButton("No");
         noButton.setVerticalTextPosition(AbstractButton.CENTER);

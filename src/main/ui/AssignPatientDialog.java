@@ -21,13 +21,10 @@ public class AssignPatientDialog extends JDialog implements ActionListener {
     public AssignPatientDialog(Frame parent) {
         super(parent, "Assign Patient", true);
 
-
         data = new String[2];
 
         createLabels();
-
         createFields();
-
         createAssignButton();
 
         assignButton.addActionListener(this);
@@ -42,7 +39,6 @@ public class AssignPatientDialog extends JDialog implements ActionListener {
         panel.add(assignButton);
 
         this.add(panel);
-
     }
 
     // EFFECTS: builds labels for name and assignment questions
@@ -92,6 +88,4 @@ public class AssignPatientDialog extends JDialog implements ActionListener {
         this.setVisible(true);
         return data;
     }
-
-
 }

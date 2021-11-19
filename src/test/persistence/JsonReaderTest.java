@@ -2,6 +2,8 @@ package persistence;
 
 import model.ListOfPatients;
 import model.Patient;
+import org.json.JSONObject;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -11,6 +13,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class JsonReaderTest extends JsonTest {
+    private ListOfPatients testList;
+    private JSONObject testJsonObject;
+
+    @BeforeEach
+    void runBefore() {
+        testList = new ListOfPatients("test");
+        testJsonObject = new JSONObject();
+    }
+
+    @Test
+    void testParseListOfPatients() {
+
+
+    }
 
     @Test
     void testReaderNonExistentFile() {

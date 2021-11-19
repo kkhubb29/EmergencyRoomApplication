@@ -35,8 +35,6 @@ public class AddPatientDialog extends JDialog implements ActionListener {
     public AddPatientDialog(Frame parent) {
         super(parent, "Add Patient", true);
 
-        // EFFECTS: creates the elements to be placed on the questionnaire panel in the dialog
-
         createLabels();
         createFields();
 
@@ -49,23 +47,15 @@ public class AddPatientDialog extends JDialog implements ActionListener {
         createAddButton();
         createCancelButton();
 
-        // EFFECTS: adds a listener to the submit button
-
         addButton.addActionListener(this);
 
-        // EFFECTS: adds tool tips
-
         createToolTips();
-
-        //Add Creates the questionnaire panel and adds it to this dialog
 
         JPanel panel = new JPanel();
 
         buildQuestionnaire(panel);
 
         this.add(panel);
-
-
     }
 
     // EFFECTS: builds the trouble breathing radio button
@@ -207,7 +197,7 @@ public class AddPatientDialog extends JDialog implements ActionListener {
     }
 
     // MODIFIES: patient
-    // EFFECTS: sets patient information for the first half of the questiosn from the questionnaire
+    // EFFECTS: sets patient information for the trouble breathing, chest pain and bleeding radio buttons
     public void firstHalf() {
         if (troubleBreathingButton.isSelected()) {
             p1.setTroubleBreathing("y");
@@ -227,7 +217,7 @@ public class AddPatientDialog extends JDialog implements ActionListener {
     }
 
     // MODIFIES: patient
-    // EFFECTS: sets patient information for the second half ot he questions from the questionnaire
+    // EFFECTS: sets patient information for the nauseous, head injury, and pregnant radio buttons
     public void secondHalf() {
         if (nauseousButton.isSelected()) {
             p1.setNauseous("y");

@@ -31,14 +31,14 @@ public class JsonReader {
         return parseListOfPatients(jsonObject);
     }
 
-    // EFFECTS: reads list of patient from file and returns it;
+    /*// EFFECTS: reads list of patient from file and returns it;
     // throws IOException if an error occurs reading data from file
     public void read(ListOfPatients listOfPatients) throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         parseListOfPatients(jsonObject, listOfPatients);
         return;
-    }
+    }*/
 
     // EFFECTS: reads source file as string and returns it
     private String readFile(String source) throws IOException {
@@ -59,13 +59,12 @@ public class JsonReader {
         return lp;
     }
 
-    // EFFECTS: parses list of patients from JSON object and returns it
+    /*// EFFECTS: parses list of patients from JSON object and returns it
     private ListOfPatients parseListOfPatients(JSONObject jsonObject, ListOfPatients lp) {
         String name = jsonObject.getString("name");
-//        ListOfPatients lp = new ListOfPatients(name);
         addPatients(lp, jsonObject);
         return lp;
-    }
+    }*/
 
     // MODIFIES: lp
     // EFFECTS: parses patients from JSON object and adds them to list of patients

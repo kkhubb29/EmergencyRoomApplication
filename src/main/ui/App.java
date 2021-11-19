@@ -91,6 +91,7 @@ public class App extends JFrame implements ActionListener {
 
     }
 
+    // EFFECTS: builds all the buttons
     public void createAllButton() {
         createAddPatientButton();
         createLoadPatientButton();
@@ -275,10 +276,7 @@ public class App extends JFrame implements ActionListener {
             StartLoadDialog dlg = new StartLoadDialog(this);
             boolean load = dlg.run();
             if (load) {
-                System.out.println(erPatients.getListOfPatients());
-                jsonReader.read(erPatients);
-                System.out.println(erPatients.getListOfPatients());
-                System.out.println("Loaded " + erPatients.getName() + " from " + JSON_STORE);
+                erPatients = jsonReader.read();
             }
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);

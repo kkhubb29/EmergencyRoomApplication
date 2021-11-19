@@ -194,6 +194,7 @@ public class Patient implements Writable {
     }
 
     @Override
+    // EFFECTS: creates fields for file
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", patientName);
