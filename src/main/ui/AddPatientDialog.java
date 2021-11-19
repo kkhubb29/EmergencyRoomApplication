@@ -14,6 +14,7 @@ import static java.lang.Integer.parseInt;
 public class AddPatientDialog extends JDialog implements ActionListener {
 
     protected JButton addButton;
+    protected JButton cancelButton;
     protected JRadioButton troubleBreathingButton;
     protected JRadioButton chestPainButton;
     protected JRadioButton bleedingButton;
@@ -46,6 +47,7 @@ public class AddPatientDialog extends JDialog implements ActionListener {
         createHeadInjuryButton();
         createPregnantButton();
         createAddButton();
+        createCancelButton();
 
         // EFFECTS: adds a listener to the submit button
 
@@ -145,6 +147,15 @@ public class AddPatientDialog extends JDialog implements ActionListener {
         addButton.setActionCommand("Submit");
     }
 
+    // EFFECTS: builds the cancel button
+    public void createCancelButton() {
+        cancelButton = new JButton("Cancel");
+        cancelButton.setVerticalTextPosition(AbstractButton.CENTER);
+        cancelButton.setHorizontalTextPosition(AbstractButton.LEADING);
+        cancelButton.setMnemonic(KeyEvent.VK_C);
+        cancelButton.setActionCommand("cancel");
+    }
+
     // EFFECTS: builds text that appears when user hovers over buttons
     public void createToolTips() {
         troubleBreathingButton.setToolTipText("Select if you are having trouble breathing");
@@ -154,6 +165,7 @@ public class AddPatientDialog extends JDialog implements ActionListener {
         headInjuryButton.setToolTipText("Select if you have a head injury");
         pregnantButton.setToolTipText("Select if you are pregnant");
         addButton.setToolTipText("Click to submit questionnaire");
+        cancelButton.setToolTipText("Click to cancel");
     }
 
     // EFFECTS: adds the buttons, fields, and labels to the questionnaire panel
@@ -172,6 +184,7 @@ public class AddPatientDialog extends JDialog implements ActionListener {
         panel.add(headInjuryButton);
         panel.add(pregnantButton);
         panel.add(addButton);
+        panel.add(cancelButton);
     }
 
     // REQUIRES: the user to click the add button
@@ -187,6 +200,8 @@ public class AddPatientDialog extends JDialog implements ActionListener {
             firstHalf();
             secondHalf();
             p1.setScore(p1.calculateScore());
+        } else if ("cancel".equals(e.getActionCommand())) {
+            p1 = null;
         }
         dispose();
     }

@@ -7,9 +7,12 @@ import persistence.JsonWriter;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 // the GUI for the ER Patients triage App
@@ -37,9 +40,10 @@ public class App extends JFrame implements ActionListener {
     }
 
     // EFFECTS: Add the main panel to a container
-    public void addPanelToContainer(Container pane) {
+    public void addPanelToContainer(Container pane) throws IOException {
 
         // EFFECTS: creates two sub panels and one main one
+        JPanel logoPanel = new JPanel();
         JPanel buttonsPanel = new JPanel();
         JPanel tablePanel = new JPanel();
         JPanel mainPanel = new JPanel();
@@ -48,13 +52,14 @@ public class App extends JFrame implements ActionListener {
 
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
+        BufferedImage logo = ImageIO.read(new File("./data/ER Patients Triage.jpg"));
+        JLabel picLabel = new JLabel(new ImageIcon(logo));
+        logoPanel.add(picLabel);
+
+
         // EFFECTS: builds the buttons sub panel
         // EFFECTS: creates the buttons, listeners and tooltips for the buttonsPanel
-        createAddPatientButton();
-        createLoadPatientButton();
-        createSavePatientButton();
-        createAssignPatientButton();
-        createRemovePatientButton();
+        createAllButton();
 
         createActionListeners();
 
@@ -77,6 +82,7 @@ public class App extends JFrame implements ActionListener {
 
         // EFFECTS: builds the main panel by adding the two subpanels to it
 
+        mainPanel.add(logoPanel);
         mainPanel.add(tablePanel);
         mainPanel.add(buttonsPanel);
 
@@ -85,6 +91,13 @@ public class App extends JFrame implements ActionListener {
 
     }
 
+    public void createAllButton() {
+        createAddPatientButton();
+        createLoadPatientButton();
+        createSavePatientButton();
+        createAssignPatientButton();
+        createRemovePatientButton();
+    }
 
     // EFFECTS: builds the add patient button
     public void createAddPatientButton() {
@@ -152,16 +165,21 @@ public class App extends JFrame implements ActionListener {
     private static void createAndShowGUI() throws FileNotFoundException {
 
         try {
+
             JFrame frame = new JFrame("ER Application");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             App erPatients = new App();
+            erPatients.doLoadListOfPatients();
+
             erPatients.addPanelToContainer(frame);
 
             frame.pack();
             frame.setVisible(true);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to run application: file not found");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -212,8 +230,9 @@ public class App extends JFrame implements ActionListener {
         AddPatientDialog dlg = new AddPatientDialog(this);
         dlg.setLayout(new FlowLayout());
         Patient results = dlg.run();
-        System.out.println(results.getPatientName());
-        erPatients.addPatient(results);
+        if (!(results == null)) {
+            erPatients.addPatient(results);
+        }
         patients.fireTableDataChanged();
     }
 
@@ -253,11 +272,14 @@ public class App extends JFrame implements ActionListener {
     // EFFECTS: loads list of patients from file
     public void doLoadListOfPatients() {
         try {
-            System.out.println(erPatients.getListOfPatients());
-            jsonReader.read(erPatients);
-            System.out.println(erPatients.getListOfPatients());
-            patients.fireTableDataChanged();
-            System.out.println("Loaded " + erPatients.getName() + " from " + JSON_STORE);
+            StartLoadDialog dlg = new StartLoadDialog(this);
+            boolean load = dlg.run();
+            if (load) {
+                System.out.println(erPatients.getListOfPatients());
+                jsonReader.read(erPatients);
+                System.out.println(erPatients.getListOfPatients());
+                System.out.println("Loaded " + erPatients.getName() + " from " + JSON_STORE);
+            }
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
