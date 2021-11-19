@@ -52,7 +52,7 @@ public class App extends JFrame implements ActionListener {
 
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        BufferedImage logo = ImageIO.read(new File("./data/ER Patients Triage.jpg"));
+        BufferedImage logo = ImageIO.read(new File("./data/er logo.png"));
         JLabel picLabel = new JLabel(new ImageIcon(logo));
         logoPanel.add(picLabel);
 
@@ -231,9 +231,7 @@ public class App extends JFrame implements ActionListener {
         AddPatientDialog dlg = new AddPatientDialog(this);
         dlg.setLayout(new FlowLayout());
         Patient results = dlg.run();
-        if (!(results == null)) {
-            erPatients.addPatient(results);
-        }
+        erPatients.addPatient(results);
         patients.fireTableDataChanged();
     }
 
