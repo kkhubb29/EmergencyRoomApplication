@@ -15,7 +15,7 @@ public class StartLoadDialog extends JDialog implements ActionListener {
     private boolean load;
 
     // EFFECTS: constructs the load patients dialog
-    public StartLoadDialog (Frame parent) {
+    public StartLoadDialog(Frame parent) {
         super(parent, "Load Patients", true);
         this.setPreferredSize(new Dimension(500,90));
 
@@ -24,19 +24,9 @@ public class StartLoadDialog extends JDialog implements ActionListener {
         dialogText = new JLabel();
         dialogText.setText("Would you like to load existing patients?");
 
-        yesButton = new JButton("Yes");
-        yesButton.setVerticalTextPosition(AbstractButton.CENTER);
-        yesButton.setHorizontalTextPosition(AbstractButton.LEADING);
-        yesButton.setMnemonic(KeyEvent.VK_Y);
-        yesButton.setActionCommand("Load");
-        yesButton.addActionListener(this);
+        createYestButton();
 
-        noButton = new JButton("No");
-        noButton.setVerticalTextPosition(AbstractButton.CENTER);
-        noButton.setHorizontalTextPosition(AbstractButton.LEADING);
-        noButton.setMnemonic(KeyEvent.VK_N);
-        noButton.setActionCommand("Cancel");
-        noButton.addActionListener(this);
+        createNoButton();
 
         JPanel buttons = new JPanel();
         buttons.add(yesButton);
@@ -50,6 +40,24 @@ public class StartLoadDialog extends JDialog implements ActionListener {
 
         this.add(panel);
 
+    }
+
+    public void createYestButton() {
+        yesButton = new JButton("Yes");
+        yesButton.setVerticalTextPosition(AbstractButton.CENTER);
+        yesButton.setHorizontalTextPosition(AbstractButton.LEADING);
+        yesButton.setMnemonic(KeyEvent.VK_Y);
+        yesButton.setActionCommand("Load");
+        yesButton.addActionListener(this);
+    }
+
+    public void createNoButton() {
+        noButton = new JButton("No");
+        noButton.setVerticalTextPosition(AbstractButton.CENTER);
+        noButton.setHorizontalTextPosition(AbstractButton.LEADING);
+        noButton.setMnemonic(KeyEvent.VK_N);
+        noButton.setActionCommand("Cancel");
+        noButton.addActionListener(this);
     }
 
     // REQUIRES: the user to click the yes button
