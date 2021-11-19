@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 // the GUI for the ER Patients triage App
-public class App extends JFrame implements ActionListener {
+public class RunApp extends JFrame implements ActionListener {
 
     private static final String JSON_STORE = "./data/listOfPatients.json";
 
@@ -33,7 +33,7 @@ public class App extends JFrame implements ActionListener {
     protected PatientsTable patients;
 
     // EFFECTS: initializes the app
-    public App() throws FileNotFoundException {
+    public RunApp() throws FileNotFoundException {
         erPatients = new ListOfPatients("ER Patients");
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
@@ -42,13 +42,11 @@ public class App extends JFrame implements ActionListener {
     // EFFECTS: Add the main panel to a container
     public void addPanelToContainer(Container pane) throws IOException {
 
-        // EFFECTS: creates two sub panels and one main one
         JPanel logoPanel = new JPanel();
         JPanel buttonsPanel = new JPanel();
         JPanel tablePanel = new JPanel();
         JPanel mainPanel = new JPanel();
 
-        // EFFECTS: sets the layout on the mainPanel to be a vertical box layout
 
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
@@ -57,36 +55,24 @@ public class App extends JFrame implements ActionListener {
         logoPanel.add(picLabel);
 
 
-        // EFFECTS: builds the buttons sub panel
-        // EFFECTS: creates the buttons, listeners and tooltips for the buttonsPanel
         createAllButton();
-
         createActionListeners();
-
         createButtonToolTips();
 
-        // EFFECTS: adds the buttons to the buttonsPanel
         buttonsPanel.add(addPatientButton);
         buttonsPanel.add(assignButton);
         buttonsPanel.add(removeButton);
-        buttonsPanel.add(loadButton);
+        //buttonsPanel.add(loadButton);
         buttonsPanel.add(saveButton);
 
-        // EFFECTS: builds the table sub panel
-
-        // EFFECTS: constructs a new table of patients
         patients = new PatientsTable(erPatients);
 
-        // EFFECTS: adds the table of patients to the tablePanel
         tablePanel.add(patients);
-
-        // EFFECTS: builds the main panel by adding the two subpanels to it
 
         mainPanel.add(logoPanel);
         mainPanel.add(tablePanel);
         mainPanel.add(buttonsPanel);
 
-        // EFFECTS: adds the main panel to the container
         pane.add(mainPanel);
 
     }
@@ -94,7 +80,7 @@ public class App extends JFrame implements ActionListener {
     // EFFECTS: builds all the buttons
     public void createAllButton() {
         createAddPatientButton();
-        createLoadPatientButton();
+        //createLoadPatientButton();
         createSavePatientButton();
         createAssignPatientButton();
         createRemovePatientButton();
@@ -136,27 +122,27 @@ public class App extends JFrame implements ActionListener {
         saveButton.setActionCommand("Save");
     }
 
-    // EFFECTS: builds the load patient button
+    /*// EFFECTS: builds the load patient button
     public void createLoadPatientButton() {
         loadButton = new JButton("Load Patients");
         loadButton.setVerticalTextPosition(AbstractButton.CENTER);
         loadButton.setHorizontalTextPosition(AbstractButton.LEADING);
         loadButton.setMnemonic(KeyEvent.VK_L);
         loadButton.setActionCommand("Load");
-    }
+    }*/
 
     // EFFECTS: builds text that appears when user hovers over buttons
     public void createButtonToolTips() {
         addPatientButton.setToolTipText("Click to add a patient to the list");
         removeButton.setToolTipText("Click to remove a patient from the list");
         saveButton.setToolTipText("Click to save list of patients");
-        loadButton.setToolTipText("Click to load list of patients");
+        //loadButton.setToolTipText("Click to load list of patients");
     }
 
     // EFFECTS: creates action listeners for each button
     public void createActionListeners() {
         addPatientButton.addActionListener(this);
-        loadButton.addActionListener(this);
+        //loadButton.addActionListener(this);
         saveButton.addActionListener(this);
         assignButton.addActionListener(this);
         removeButton.addActionListener(this);
@@ -170,7 +156,7 @@ public class App extends JFrame implements ActionListener {
             JFrame frame = new JFrame("ER Application");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            App erPatients = new App();
+            RunApp erPatients = new RunApp();
             erPatients.doLoadListOfPatients();
 
             erPatients.addPanelToContainer(frame);
@@ -214,8 +200,6 @@ public class App extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if ("Add Patient".equals(ae.getActionCommand())) {
             doAddPatient();
-        } else if ("Load".equals(ae.getActionCommand())) {
-            doLoadListOfPatients();
         } else if ("Save".equals(ae.getActionCommand())) {
             doSaveListOfPatient();
         } else if ("Assign".equals(ae.getActionCommand())) {
@@ -261,7 +245,6 @@ public class App extends JFrame implements ActionListener {
             jsonWriter.open();
             jsonWriter.write(erPatients);
             jsonWriter.close();
-            System.out.println("Saved " + erPatients.getName() + " to " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
