@@ -4,11 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
 // creates the remove patient dialog to remove a patient from the list of patients
 public class RemovePatientDialog extends JDialog implements ActionListener {
 
-    protected JButton submitButton;
+    protected JButton removeButton;
     protected JTextField nameField;
     protected JTextArea textArea;
     protected JLabel nameLabel;
@@ -28,24 +29,30 @@ public class RemovePatientDialog extends JDialog implements ActionListener {
         textArea = new JTextArea(1, 20);
         textArea.setEditable(true);
 
-        submitButton = new JButton("Submit");
-        submitButton.setVerticalTextPosition(AbstractButton.CENTER);
-        submitButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
-        submitButton.setActionCommand("Submit");
+        createRemoveButton();
 
-        submitButton.addActionListener(this);
+        removeButton.addActionListener(this);
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         panel.add(nameLabel);
         panel.add(nameField);
-        panel.add(submitButton);
+        panel.add(removeButton);
 
         this.add(panel);
     }
 
-    // REQUIRES: the user to click the submit button
+    // EFFECTS: builds remove button
+    public void createRemoveButton() {
+        removeButton = new JButton("Remove");
+        removeButton.setVerticalTextPosition(AbstractButton.CENTER);
+        removeButton.setHorizontalTextPosition(AbstractButton.LEADING);
+        removeButton.setMnemonic(KeyEvent.VK_R);
+        removeButton.setActionCommand("Submit");
+    }
+
+    // REQUIRES: the user to click the remove button
     // EFFECTS: stores the answer to the question and closes the window
     public void actionPerformed(ActionEvent e) {
         if ("Submit".equals(e.getActionCommand())) {

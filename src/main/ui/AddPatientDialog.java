@@ -1,19 +1,19 @@
 package ui;
 
-import model.ListOfPatients;
 import model.Patient;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
 import static java.lang.Integer.parseInt;
 
 // creates the patient questionnaire to add a patient
 public class AddPatientDialog extends JDialog implements ActionListener {
 
-    protected JButton submitButton;
+    protected JButton addButton;
     protected JRadioButton troubleBreathingButton;
     protected JRadioButton chestPainButton;
     protected JRadioButton bleedingButton;
@@ -45,11 +45,11 @@ public class AddPatientDialog extends JDialog implements ActionListener {
         createNauseousButton();
         createHeadInjuryButton();
         createPregnantButton();
-        createSubmitButton();
+        createAddButton();
 
         // EFFECTS: adds a listener to the submit button
 
-        submitButton.addActionListener(this);
+        addButton.addActionListener(this);
 
         // EFFECTS: adds tool tips
 
@@ -136,12 +136,13 @@ public class AddPatientDialog extends JDialog implements ActionListener {
         textArea.setEditable(true);
     }
 
-    // EFFECTS: builds the submit button
-    public void createSubmitButton() {
-        submitButton = new JButton("Submit");
-        submitButton.setVerticalTextPosition(AbstractButton.CENTER);
-        submitButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
-        submitButton.setActionCommand("Submit");
+    // EFFECTS: builds the add button
+    public void createAddButton() {
+        addButton = new JButton("Add");
+        addButton.setVerticalTextPosition(AbstractButton.CENTER);
+        addButton.setHorizontalTextPosition(AbstractButton.LEADING);
+        addButton.setMnemonic(KeyEvent.VK_A);
+        addButton.setActionCommand("Submit");
     }
 
     // EFFECTS: builds text that appears when user hovers over buttons
@@ -152,7 +153,7 @@ public class AddPatientDialog extends JDialog implements ActionListener {
         nauseousButton.setToolTipText("Select if you are nauseous");
         headInjuryButton.setToolTipText("Select if you have a head injury");
         pregnantButton.setToolTipText("Select if you are pregnant");
-        submitButton.setToolTipText("Click to submit questionnaire");
+        addButton.setToolTipText("Click to submit questionnaire");
     }
 
     // EFFECTS: adds the buttons, fields, and labels to the questionnaire panel
@@ -170,12 +171,11 @@ public class AddPatientDialog extends JDialog implements ActionListener {
         panel.add(nauseousButton);
         panel.add(headInjuryButton);
         panel.add(pregnantButton);
-        panel.add(submitButton);
+        panel.add(addButton);
     }
 
-    // REQUIRES: the user to click the submit button
+    // REQUIRES: the user to click the add button
     // EFFECTS: creates a patient based on the answers to the questionnaire and closes the questionnaire
-    @SuppressWarnings("methodlength")
     public void actionPerformed(ActionEvent e) {
         if ("Submit".equals(e.getActionCommand())) {
             String nameText = nameField.getText();
@@ -184,39 +184,51 @@ public class AddPatientDialog extends JDialog implements ActionListener {
             p1.setAge(parseInt(ageText));
             String painText = painField.getText();
             p1.setPain(parseInt(painText));
-            if (troubleBreathingButton.isSelected()) {
-                p1.setTroubleBreathing("y");
-            } else {
-                p1.setTroubleBreathing("n");
-            }
-            if (chestPainButton.isSelected()) {
-                p1.setChestPain("y");
-            } else {
-                p1.setChestPain("n");
-            }
-            if (bleedingButton.isSelected()) {
-                p1.setBleeding("y");
-            } else {
-                p1.setBleeding("n");
-            }
-            if (nauseousButton.isSelected()) {
-                p1.setNauseous("y");
-            } else {
-                p1.setNauseous("n");
-            }
-            if (headInjuryButton.isSelected()) {
-                p1.setHeadInjury("y");
-            } else {
-                p1.setHeadInjury("n");
-            }
-            if (pregnantButton.isSelected()) {
-                p1.setPregnant("y");
-            } else {
-                p1.setPregnant("n");
-            }
+            firstHalf();
+            secondHalf();
             p1.setScore(p1.calculateScore());
         }
         dispose();
+    }
+
+    // MODIFIES: patient
+    // EFFECTS: sets patient information for the first half of the questiosn from the questionnaire
+    public void firstHalf() {
+        if (troubleBreathingButton.isSelected()) {
+            p1.setTroubleBreathing("y");
+        } else {
+            p1.setTroubleBreathing("n");
+        }
+        if (chestPainButton.isSelected()) {
+            p1.setChestPain("y");
+        } else {
+            p1.setChestPain("n");
+        }
+        if (bleedingButton.isSelected()) {
+            p1.setBleeding("y");
+        } else {
+            p1.setBleeding("n");
+        }
+    }
+
+    // MODIFIES: patient
+    // EFFECTS: sets patient information for the second half ot he questions from the questionnaire
+    public void secondHalf() {
+        if (nauseousButton.isSelected()) {
+            p1.setNauseous("y");
+        } else {
+            p1.setNauseous("n");
+        }
+        if (headInjuryButton.isSelected()) {
+            p1.setHeadInjury("y");
+        } else {
+            p1.setHeadInjury("n");
+        }
+        if (pregnantButton.isSelected()) {
+            p1.setPregnant("y");
+        } else {
+            p1.setPregnant("n");
+        }
     }
 
     // EFFECTS: displays the questionnaire and returns the new patient

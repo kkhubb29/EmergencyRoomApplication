@@ -17,7 +17,6 @@ public class PatientsTable extends JPanel {
 
     // EFFECTS: constructs a table
     public PatientsTable(ListOfPatients lop) {
-        lop.getListOfPatientsSorted();
         this.myList = lop;
         setBounds(10, 10, 400, 300);
         tableModel = new PatientTableModel(myList);

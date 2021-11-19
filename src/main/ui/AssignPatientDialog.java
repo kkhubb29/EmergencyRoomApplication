@@ -4,10 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
 // creates the assign patient dialog to change the assignment of a patient from the list of patients
 public class AssignPatientDialog extends JDialog implements ActionListener {
-    protected JButton submitButton;
+    protected JButton assignButton;
     protected JTextField nameField;
     protected JTextField assignField;
     protected JTextArea textArea;
@@ -27,12 +28,9 @@ public class AssignPatientDialog extends JDialog implements ActionListener {
 
         createFields();
 
-        submitButton = new JButton("Submit");
-        submitButton.setVerticalTextPosition(AbstractButton.CENTER);
-        submitButton.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
-        submitButton.setActionCommand("Submit");
+        createAssignButton();
 
-        submitButton.addActionListener(this);
+        assignButton.addActionListener(this);
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -41,7 +39,7 @@ public class AssignPatientDialog extends JDialog implements ActionListener {
         panel.add(nameField);
         panel.add(assignLabel);
         panel.add(assignField);
-        panel.add(submitButton);
+        panel.add(assignButton);
 
         this.add(panel);
 
@@ -67,7 +65,16 @@ public class AssignPatientDialog extends JDialog implements ActionListener {
         textArea.setEditable(true);
     }
 
-    // REQUIRES: the user to click the submit button
+    // EFFECTS: builds assign button
+    public void createAssignButton() {
+        assignButton = new JButton("Assign");
+        assignButton.setVerticalTextPosition(AbstractButton.CENTER);
+        assignButton.setHorizontalTextPosition(AbstractButton.LEADING);
+        assignButton.setMnemonic(KeyEvent.VK_A);
+        assignButton.setActionCommand("Submit");
+    }
+
+    // REQUIRES: the user to click the assign button
     // EFFECTS: stores the answers to the questions and closes the window
     public void actionPerformed(ActionEvent e) {
         if ("Submit".equals(e.getActionCommand())) {

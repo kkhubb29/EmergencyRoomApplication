@@ -34,10 +34,6 @@ public class App extends JFrame implements ActionListener {
         erPatients = new ListOfPatients("ER Patients");
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
-        Patient p1 = new Patient("troy");
-        Patient p2 = new Patient("fred");
-        erPatients.addPatient(p1);
-        erPatients.addPatient(p2);
     }
 
     // EFFECTS: Add the main panel to a container
@@ -110,16 +106,16 @@ public class App extends JFrame implements ActionListener {
 
     // EFFECTS: builds the assign patient button
     public void createAssignPatientButton() {
-        assignButton = new JButton("Assign");
+        assignButton = new JButton("Assign Patient");
         assignButton.setVerticalTextPosition(AbstractButton.CENTER);
         assignButton.setHorizontalTextPosition(AbstractButton.LEADING);
-        assignButton.setMnemonic(KeyEvent.VK_G);
+        assignButton.setMnemonic(KeyEvent.VK_P);
         assignButton.setActionCommand("Assign");
     }
 
     // EFFECTS: builds the save patients button
     public void createSavePatientButton() {
-        saveButton = new JButton("Save");
+        saveButton = new JButton("Save Patients");
         saveButton.setVerticalTextPosition(AbstractButton.CENTER);
         saveButton.setHorizontalTextPosition(AbstractButton.LEADING);
         saveButton.setMnemonic(KeyEvent.VK_S);
@@ -128,7 +124,7 @@ public class App extends JFrame implements ActionListener {
 
     // EFFECTS: builds the load patient button
     public void createLoadPatientButton() {
-        loadButton = new JButton("Load");
+        loadButton = new JButton("Load Patients");
         loadButton.setVerticalTextPosition(AbstractButton.CENTER);
         loadButton.setHorizontalTextPosition(AbstractButton.LEADING);
         loadButton.setMnemonic(KeyEvent.VK_L);
@@ -139,8 +135,8 @@ public class App extends JFrame implements ActionListener {
     public void createButtonToolTips() {
         addPatientButton.setToolTipText("Click to add a patient to the list");
         removeButton.setToolTipText("Click to remove a patient from the list");
-        saveButton.setToolTipText("Click to save list");
-        loadButton.setToolTipText("Click to load list");
+        saveButton.setToolTipText("Click to save list of patients");
+        loadButton.setToolTipText("Click to load list of patients");
     }
 
     // EFFECTS: creates action listeners for each button
@@ -247,7 +243,6 @@ public class App extends JFrame implements ActionListener {
             jsonWriter.open();
             jsonWriter.write(erPatients);
             jsonWriter.close();
-            patients.fireTableDataChanged();
             System.out.println("Saved " + erPatients.getName() + " to " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
@@ -258,7 +253,9 @@ public class App extends JFrame implements ActionListener {
     // EFFECTS: loads list of patients from file
     public void doLoadListOfPatients() {
         try {
-            erPatients = jsonReader.read();
+            System.out.println(erPatients.getListOfPatients());
+            jsonReader.read(erPatients);
+            System.out.println(erPatients.getListOfPatients());
             patients.fireTableDataChanged();
             System.out.println("Loaded " + erPatients.getName() + " from " + JSON_STORE);
         } catch (IOException e) {

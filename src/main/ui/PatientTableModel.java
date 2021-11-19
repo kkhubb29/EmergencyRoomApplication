@@ -14,7 +14,6 @@ public class PatientTableModel extends AbstractTableModel {
 
     // EFFECTS: constructs the model for that table of patients for a list of patients
     public PatientTableModel(ListOfPatients patientList) {
-        patientList.getListOfPatientsSorted();
         myList = patientList.getListOfPatients();
     }
 
