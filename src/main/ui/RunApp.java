@@ -136,6 +136,7 @@ public class RunApp extends JFrame implements ActionListener {
         addPatientButton.setToolTipText("Click to add a patient to the list");
         removeButton.setToolTipText("Click to remove a patient from the list");
         saveButton.setToolTipText("Click to save list of patients");
+        assignButton.setToolTipText("Click to assign a patient");
         //loadButton.setToolTipText("Click to load list of patients");
     }
 

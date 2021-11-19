@@ -22,7 +22,7 @@ public class StartLoadDialog extends JDialog implements ActionListener {
         load = false;
 
         questionLabel = new JLabel();
-        questionLabel.setText("Would you like to load existing patients?");
+        questionLabel.setText("Would you like to load an existing list of patients?");
 
         createYestButton();
 
