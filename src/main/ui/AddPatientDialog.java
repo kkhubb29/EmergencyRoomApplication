@@ -128,6 +128,7 @@ public class AddPatientDialog extends JDialog implements ActionListener {
         textArea.setEditable(true);
     }
 
+    // MODIFIES: this
     // EFFECTS: builds the add button
     public void createAddButton() {
         addButton = new JButton("Add");
