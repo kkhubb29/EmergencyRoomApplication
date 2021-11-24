@@ -28,7 +28,7 @@ public class ListOfPatients implements Writable {
     // EFFECTS: Patient p is added to the ListOfPatients
     public void addPatient(Patient p) {
         patients.add(p);
-        EventLog.getInstance().logEvent(new Event("Patient: " + p.getPatientName() + " added to "
+        EventLog.getInstance().logEvent(new Event("Patient: " + p.getPatientName() + " was added to "
                 + getName() + "."));
     }
 
@@ -37,7 +37,7 @@ public class ListOfPatients implements Writable {
     // EFFECTS: Patient p is removed from ListOfPatients
     public void removePatient(Patient p) {
         patients.remove(p);
-        EventLog.getInstance().logEvent(new Event("Patient: " + p.getPatientName() + " removed from "
+        EventLog.getInstance().logEvent(new Event("Patient: " + p.getPatientName() + " was removed from "
                 + getName() + "."));
     }
 

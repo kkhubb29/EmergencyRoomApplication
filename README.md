@@ -31,4 +31,27 @@ I will introduce sorting the list at a later phase.
 - As a user *(ER coordinator)*, I want to be able to save the list of patients to file.
 - As a user *(ER coordinator)*, I want to be able to load the list of patients from file.
 
+## Phase 4: Task 2
+Wed Nov 24 12:20:26 PST 2021
+Patient: becca was added to ER Patients.
+
+
+Wed Nov 24 12:20:34 PST 2021
+becca was assigned to doctor.
+
+
+Wed Nov 24 12:20:48 PST 2021
+Patient: greg was added to ER Patients.
+
+
+Wed Nov 24 12:20:57 PST 2021
+greg was assigned to doctor.
+
+
+Wed Nov 24 12:21:04 PST 2021
+Patient: greg was removed from ER Patients.
+
+
+
+
 

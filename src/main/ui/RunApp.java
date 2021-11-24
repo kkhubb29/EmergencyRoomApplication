@@ -10,7 +10,6 @@ import persistence.JsonWriter;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -268,13 +267,16 @@ public class RunApp extends JFrame implements ActionListener {
         }
     }
 
+    // REQUIRES: the frame to be closed
+    // EFFECTS: runs when frame is closed
     class WindowEventHandler extends WindowAdapter {
         public void windowClosing(WindowEvent evt) {
-            System.out.println("Call your method here");
             printLog(EventLog.getInstance());
         }
     }
 
+    // MODIFIES: console
+    // EFFECTS: prints event log to console
     public void printLog(EventLog el) {
         for (Event next : el) {
             System.out.println(next.toString() + "\n\n");
