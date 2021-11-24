@@ -57,7 +57,7 @@ public class EventTest {
     @Test
     public void testHashCode() {
         description = "Added patient";
-        assertEquals((13 * d.hashCode() + description.hashCode()), e.hashCode());
+        assertEquals((13 * (e.getDate()).hashCode() + description.hashCode()), e.hashCode());
     }
 
 }
