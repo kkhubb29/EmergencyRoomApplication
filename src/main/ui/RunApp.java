@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.ListOfPatients;
 import model.Patient;
 import persistence.JsonReader;
@@ -8,6 +10,7 @@ import persistence.JsonWriter;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -40,7 +43,7 @@ public class RunApp extends JFrame implements ActionListener {
     }
 
     // EFFECTS: Add the main panel to a container
-    public void addPanelToContainer(Container pane) throws IOException {
+    public void addPanelToContainer(JFrame pane) throws IOException {
 
         JPanel logoPanel = new JPanel();
         JPanel buttonsPanel = new JPanel();
@@ -54,6 +57,7 @@ public class RunApp extends JFrame implements ActionListener {
         JLabel picLabel = new JLabel(new ImageIcon(logo));
         logoPanel.add(picLabel);
 
+        pane.addWindowListener(new WindowEventHandler());
 
         createAllButton();
         createActionListeners();
@@ -153,9 +157,8 @@ public class RunApp extends JFrame implements ActionListener {
     private static void createAndShowGUI() throws FileNotFoundException {
 
         try {
-
             JFrame frame = new JFrame("ER Application");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
             RunApp erPatients = new RunApp();
             erPatients.doLoadListOfPatients();
@@ -262,6 +265,19 @@ public class RunApp extends JFrame implements ActionListener {
             }
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+    class WindowEventHandler extends WindowAdapter {
+        public void windowClosing(WindowEvent evt) {
+            System.out.println("Call your method here");
+            printLog(EventLog.getInstance());
+        }
+    }
+
+    public void printLog(EventLog el) {
+        for (Event next : el) {
+            System.out.println(next.toString() + "\n\n");
         }
     }
 
