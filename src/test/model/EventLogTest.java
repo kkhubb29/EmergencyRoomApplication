@@ -11,6 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+// This class references code from this repo
+// Link: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem.git
+
 /**
  * Unit tests for the EventLog class
  */

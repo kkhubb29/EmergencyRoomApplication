@@ -8,6 +8,9 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+// This class references code from this repo
+// Link: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem.git
+
 /**
  * Unit tests for the Event class
  */
@@ -21,19 +24,21 @@ public class EventTest {
 
     @BeforeEach
     public void runBefore() {
-        e = new Event("Sensor open at door");   // (1)
+        e = new Event("Added patient");   // (1)
         d = Calendar.getInstance().getTime();   // (2)
     }
 
     @Test
     public void testEvent() {
-        assertEquals("Sensor open at door", e.getDescription());
-        assertEquals(d, e.getDate());
+        assertEquals("Added patient", e.getDescription());
+        //System.out.println(d.toString());
+        //System.out.println(e.getDate());
+        assertEquals(d.toString(), e.getDate().toString());
     }
 
     @Test
     public void testToString() {
-        assertEquals(d.toString() + "\n" + "Sensor open at door", e.toString());
+        assertEquals(d.toString() + "\n" + "Added patient", e.toString());
     }
 }
 

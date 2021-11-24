@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+// This class references code from this repo
+// Link: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem.git
+
+
 /**
  * Represents a log of alarm system events.
  * We use the Singleton Design Pattern to ensure that there is only
