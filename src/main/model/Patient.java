@@ -97,7 +97,7 @@ public class Patient implements Writable {
     // EFFECTS: assignment is updated to assignmentPatient
     public void setAssignment(String assignmentPatient) {
         assignment = assignmentPatient;
-        EventLog.getInstance().logEvent(new Event(this.getPatientName() + " was assigned to "
+        EventLog.getInstance().logEvent(new Event("Patient: " + this.getPatientName() + " was assigned to "
                 + assignmentPatient + "."));
     }
 

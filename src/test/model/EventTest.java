@@ -35,8 +35,6 @@ public class EventTest {
     @Test
     public void testEvent() {
         assertEquals("Added patient", e.getDescription());
-        //System.out.println(d.toString());
-        //System.out.println(e.getDate());
         assertEquals(d.toString(), e.getDate().toString());
     }
 

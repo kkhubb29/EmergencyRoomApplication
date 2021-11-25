@@ -37,7 +37,7 @@ Patient: becca was added to ER Patients.
 
 
 Wed Nov 24 12:20:34 PST 2021
-becca was assigned to doctor.
+Patient: becca was assigned to doctor.
 
 
 Wed Nov 24 12:20:48 PST 2021
@@ -45,13 +45,17 @@ Patient: greg was added to ER Patients.
 
 
 Wed Nov 24 12:20:57 PST 2021
-greg was assigned to doctor.
+Patient: greg was assigned to doctor.
 
 
 Wed Nov 24 12:21:04 PST 2021
 Patient: greg was removed from ER Patients.
 
 
+## Phase 4: Task 3
 
-
+- I would add a class for the patient questionnaire so in the future if questions wanted to be added or taken away it would be easier to do and there would be far fewer locations to implement those edits
+- Adding a questionnaire class would also reduce redundancy and complexity in the Patient class setters and getters
+- The RemovePatientDialog, AddPatientDialog, StartLoadDialog, and AssignPatientDialog all include similar methods, so I would add an interface that outlines all the methods and then implement them in each to help reduce redundancy in my code
+- 
 
