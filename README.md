@@ -54,8 +54,7 @@ Patient: greg was removed from ER Patients.
 
 ## Phase 4: Task 3
 
-- I would add a class for the patient questionnaire so in the future if questions wanted to be added or taken away it would be easier to do and there would be far fewer locations to implement those edits
+- I would add a class for the patient questionnaire so in the future if questions needed to be added or taken away it would be easier to do and there would be far fewer locations to implement those edits
 - Adding a questionnaire class would also reduce redundancy and complexity in the Patient class setters and getters
-- The RemovePatientDialog, AddPatientDialog, StartLoadDialog, and AssignPatientDialog all include similar methods, so I would add an interface that outlines all the methods and then implement them in each to help reduce redundancy in my code
-- 
+- The RemovePatientDialog, AddPatientDialog, StartLoadDialog, and AssignPatientDialog all include similar methods, so I would add an interface that outlines all the methods and then implement them in each class to help reduce redundancy in my code
 
