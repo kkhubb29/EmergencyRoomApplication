@@ -1,0 +1,38 @@
+{
+    "patients": [
+        {
+            "score": 0,
+            "nauseous": "not entered",
+            "bleeding": "not entered",
+            "chest pain": "not entered",
+            "assignment": "doctor",
+            "name": "troy",
+            "head injury": "not entered",
+            "trouble breathing": "not entered",
+            "pregnant": "not entered"
+        },
+        {
+            "score": 24,
+            "nauseous": "n",
+            "bleeding": "n",
+            "chest pain": "y",
+            "assignment": "waiting room",
+            "name": "becca",
+            "head injury": "y",
+            "trouble breathing": "n",
+            "pregnant": "n"
+        },
+        {
+            "score": 24,
+            "nauseous": "n",
+            "bleeding": "n",
+            "chest pain": "y",
+            "assignment": "doctor",
+            "name": "greg",
+            "head injury": "y",
+            "trouble breathing": "n",
+            "pregnant": "n"
+        }
+    ],
+    "name": "ER Patients"
+}

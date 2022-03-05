@@ -1,0 +1,27 @@
+{
+    "patients": [
+        {
+            "score": 0,
+            "nauseous": "not entered",
+            "bleeding": "not entered",
+            "chest pain": "not entered",
+            "assignment": "waiting room",
+            "name": "Jane",
+            "head injury": "not entered",
+            "trouble breathing": "not entered",
+            "pregnant": "not entered"
+        },
+        {
+            "score": 23,
+            "nauseous": "y",
+            "bleeding": "y",
+            "chest pain": "n",
+            "assignment": "doctor",
+            "name": "May",
+            "head injury": "y",
+            "trouble breathing": "y",
+            "pregnant": "n"
+        }
+    ],
+    "name": "ER Patients"
+}
